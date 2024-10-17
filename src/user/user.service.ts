@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { UserRepository } from './user.repository';
-import { User } from 'src/entities/user';
+import { User } from 'src/entities/user/user.entity';
 import { UserExistsResponseDto } from './dto/user-exists-response.dto';
 import { UserExistsRequestDto } from './dto/user-exists-request.dto';
 

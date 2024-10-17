@@ -4,7 +4,7 @@ import { JwtService } from '@nestjs/jwt';
 import { UserService } from 'src/user/user.service';
 import { LoginDto } from './dto/login.dto';
 import { LoginResponseDto } from './dto/login-response.dto';
-import { User } from 'src/entities/user';
+import { User } from 'src/entities/user/user.entity';
 
 @Injectable()
 export class AuthService {
@@ -26,7 +26,7 @@ export class AuthService {
   }
 
   async login(loginDto: LoginDto): Promise<LoginResponseDto> {
-    const user = await this.validateLogin(loginDto);
+    const user: User = await this.validateLogin(loginDto);
     if (!user) {
       throw new BadRequestException('error-user-not_found');
     }
