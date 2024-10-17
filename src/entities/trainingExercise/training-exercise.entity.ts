@@ -37,7 +37,7 @@ export class TrainingExercise extends DeafultEntity {
   rest_time: string;
 
   @Expose({ toClassOnly: true })
-  @ApiProperty()
+  @ApiProperty({ type: () => Training })
   @Type(() => Training)
   @ManyToOne({ entity: () => Training, index: true, nullable: true })
   training: Training;

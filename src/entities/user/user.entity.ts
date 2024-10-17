@@ -62,7 +62,7 @@ export class User extends DeafultEntity {
   @Expose()
   @ApiProperty()
   @Type(() => Gender)
-  @ManyToOne({ index: true, nullable: true })
+  @ManyToOne({ index: true })
   gender: Gender;
 
   @Expose()

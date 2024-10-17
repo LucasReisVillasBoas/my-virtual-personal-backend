@@ -38,7 +38,6 @@ export class Goals extends DeafultEntity {
   active: boolean;
 
   @Expose({ toClassOnly: true })
-  @ApiProperty({ type: () => User })
   @Type(() => User)
   @ManyToOne({ entity: () => User, index: true, nullable: true })
   user: User;
@@ -49,3 +48,4 @@ export class Goals extends DeafultEntity {
   @OneToMany(() => Training, (item) => item.goals)
   trainingList?: Training[];
 }
+

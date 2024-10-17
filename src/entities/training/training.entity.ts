@@ -32,17 +32,17 @@ export class Training extends DeafultEntity {
   @Expose({ toClassOnly: true })
   @ApiProperty({ type: () => User })
   @Type(() => User)
-  @ManyToOne({ entity: () => User, index: true, nullable: true })
+  @ManyToOne({ entity: () => User, index: true })
   user: User;
 
   @Expose()
   @ApiProperty()
   @Type(() => TrainingType)
-  @ManyToOne({ index: true, nullable: true })
+  @ManyToOne({ index: true })
   trainingType: TrainingType;
 
   @Expose({ toClassOnly: true })
-  @ApiProperty()
+  @ApiProperty({ type: () => Goals })
   @Type(() => Goals)
   @ManyToOne({ entity: () => Goals, index: true, nullable: true })
   goals: Goals;

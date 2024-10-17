@@ -1,4 +1,7 @@
 import { Controller } from '@nestjs/common';
 
 @Controller('gender')
-export class GenderController {}
+//@ApiTags('Gender')
+export class GenderController {
+  //constructor(private readonly genderService: GenderService) {}
+}
