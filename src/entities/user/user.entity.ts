@@ -7,7 +7,7 @@ import {
   Property,
 } from '@mikro-orm/core';
 import { UserRepository } from '../../user/user.repository';
-import { Expose, Type } from 'class-transformer';
+import { Exclude, Expose, Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 import { DeafultEntity } from '../default.entity';
 import { Goals } from '../goals/goals.entity';
@@ -39,7 +39,7 @@ export class User extends DeafultEntity {
   @Property({ nullable: true })
   nickname: string;
 
-  @Expose()
+  @Exclude()
   @ApiProperty()
   @Property()
   password!: string;

@@ -10,7 +10,7 @@ import { Expose, Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 import { DeafultEntity } from '../default.entity';
 import { User } from '../user/user.entity';
-import { GoalsRepository } from '../../goalsRepository/goals.repository';
+import { GoalsRepository } from '../../goals/goals.repository';
 import { Training } from '../training/training.entity';
 
 @Entity({ repository: () => GoalsRepository })
@@ -48,4 +48,3 @@ export class Goals extends DeafultEntity {
   @OneToMany(() => Training, (item) => item.goals)
   trainingList?: Training[];
 }
-

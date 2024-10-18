@@ -20,7 +20,7 @@ export class Gender extends DeafultEntity {
 
   @Expose()
   @ApiProperty()
-  @Property({ nullable: false })
+  @Property({ nullable: false, unique: true })
   code: string;
 
   @Expose()

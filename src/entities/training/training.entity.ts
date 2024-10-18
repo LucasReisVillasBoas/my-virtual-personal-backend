@@ -13,7 +13,7 @@ import { TrainingRepository } from '../../training/training.repository';
 import { User } from '../user/user.entity';
 import { TrainingType } from './training-type.entity';
 import { Goals } from '../goals/goals.entity';
-import { TrainingExercise } from '../trainingExercise/training-exercise.entity';
+import { TrainingExercise } from '../training-exercise/training-exercise.entity';
 
 @Entity({ repository: () => TrainingRepository })
 export class Training extends DeafultEntity {

@@ -3,6 +3,7 @@ import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UserService } from './user.service';
 import { UserRegisterRequestDto } from './dto/user-register-request.dto';
 import { UserRegisterResponseDto } from './dto/user-register-response.dto';
+import { filterUserFields } from '../utils/user.util';
 
 @Controller('user')
 @ApiTags('User')
@@ -20,10 +21,13 @@ export class UserController {
   ): Promise<UserRegisterResponseDto> {
     const user = await this.userService.register(userRegisterRequestDto);
 
+    const userResponseDto = filterUserFields(user, []);
+
     const userRegisterResponseDto = new UserRegisterResponseDto();
-    userRegisterResponseDto.data = { user };
+
     userRegisterResponseDto.message = 'User created';
     userRegisterResponseDto.statusCode = HttpStatus.CREATED;
+    userRegisterResponseDto.data = { user: userResponseDto };
 
     return userRegisterResponseDto;
   }

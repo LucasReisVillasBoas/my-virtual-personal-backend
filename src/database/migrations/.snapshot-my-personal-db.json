@@ -132,6 +132,16 @@
       "schema": "public",
       "indexes": [
         {
+          "columnNames": [
+            "code"
+          ],
+          "composite": false,
+          "keyName": "gender_code_unique",
+          "constraint": true,
+          "primary": false,
+          "unique": true
+        },
+        {
           "keyName": "gender_pkey",
           "columnNames": [
             "id"
@@ -534,7 +544,7 @@
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
-          "nullable": true,
+          "nullable": false,
           "mappedType": "uuid"
         },
         "restriction_id": {
@@ -593,7 +603,6 @@
             "id"
           ],
           "referencedTableName": "public.gender",
-          "deleteRule": "set null",
           "updateRule": "cascade"
         },
         "user_restriction_id_foreign": {
@@ -772,7 +781,7 @@
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
-          "nullable": true,
+          "nullable": false,
           "mappedType": "uuid"
         },
         "training_type_id": {
@@ -781,7 +790,7 @@
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
-          "nullable": true,
+          "nullable": false,
           "mappedType": "uuid"
         },
         "goals_id": {
@@ -850,7 +859,6 @@
             "id"
           ],
           "referencedTableName": "public.user",
-          "deleteRule": "set null",
           "updateRule": "cascade"
         },
         "training_training_type_id_foreign": {
@@ -863,7 +871,6 @@
             "id"
           ],
           "referencedTableName": "public.training_type",
-          "deleteRule": "set null",
           "updateRule": "cascade"
         },
         "training_goals_id_foreign": {

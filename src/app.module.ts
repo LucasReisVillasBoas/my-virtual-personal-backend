@@ -9,7 +9,7 @@ import { TrainingExerciseModule } from './training-exercise/training-exercise.mo
 import { TrainingModule } from './training/training.module';
 import { RestrictionModule } from './restriction/restriction.module';
 import { MuscleGroupModule } from './muscle-group/muscle-group.module';
-import { GoalsModule } from './goalsRepository/goals.module';
+import { GoalsModule } from './goals/goals.module';
 import { GenderModule } from './gender/gender.module';
 import { ExerciseModule } from './exercise/exercise.module';
 

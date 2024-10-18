@@ -11,8 +11,8 @@ import { Expose, Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 import { DeafultEntity } from '../default.entity';
 import { ExerciseRepository } from '../../exercise/exercise.repository';
-import { TrainingExercise } from '../trainingExercise/training-exercise.entity';
-import { MuscleGroup } from '../muscleGroup/muscle-group.entity';
+import { TrainingExercise } from '../training-exercise/training-exercise.entity';
+import { MuscleGroup } from '../muscle-group/muscle-group.entity';
 
 @Entity({ repository: () => ExerciseRepository })
 export class Exercise extends DeafultEntity {

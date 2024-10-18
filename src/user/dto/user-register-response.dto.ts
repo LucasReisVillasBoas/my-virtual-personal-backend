@@ -3,16 +3,11 @@ import { Expose } from 'class-transformer';
 import { IsEmail, IsOptional, IsString } from 'class-validator';
 import { BaseResponse } from '../../dto/base-response.dto';
 
-class UserRegisterDto {
+export class UserResponseData {
   @Expose()
   @ApiProperty()
   @IsString()
   id: string;
-
-  @Expose()
-  @ApiProperty()
-  @IsString()
-  password: string;
 
   @Expose()
   @ApiProperty()
@@ -23,7 +18,7 @@ class UserRegisterDto {
   @ApiProperty()
   @IsString()
   @IsOptional()
-  nickname: string;
+  nickname?: string;
 
   @Expose()
   @ApiProperty()
@@ -47,10 +42,10 @@ class UserRegisterDto {
   email: string;
 }
 
-class UserData {
+class UserResponseDto {
   @Expose()
-  @ApiProperty({ type: UserRegisterDto })
-  user: UserRegisterDto;
+  @ApiProperty()
+  user: UserResponseData;
 }
 
-export class UserRegisterResponseDto extends BaseResponse<UserData> {}
+export class UserRegisterResponseDto extends BaseResponse<UserResponseDto> {}
