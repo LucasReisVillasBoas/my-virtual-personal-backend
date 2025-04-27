@@ -12,7 +12,7 @@ import { MuscleGroupModule } from './muscle-group/muscle-group.module';
 import { GoalsModule } from './goals/goals.module';
 import { GenderModule } from './gender/gender.module';
 import { ExerciseModule } from './exercise/exercise.module';
-import { ProfessionalModule } from './professionals/professionals.module';
+import { ProfessionalsModule } from './professionals/professionals.module';
 
 @Module({
   imports: [
@@ -26,7 +26,7 @@ import { ProfessionalModule } from './professionals/professionals.module';
     GoalsModule,
     GenderModule,
     ExerciseModule,
-    ProfessionalModule,
+    ProfessionalsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

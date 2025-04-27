@@ -7,6 +7,7 @@ import {
   OneToMany,
   PrimaryKey,
   Property,
+  Collection,
 } from '@mikro-orm/core';
 import { UserRepository } from '../../user/user.repository';
 import { Exclude, Expose, Type } from 'class-transformer';
@@ -103,5 +104,5 @@ export class User extends DeafultEntity {
     nullable: true,
     mappedBy: 'users',
   })
-  professionals?: Professionals[];
+  professionals? = new Collection<Professionals>(this);
 }

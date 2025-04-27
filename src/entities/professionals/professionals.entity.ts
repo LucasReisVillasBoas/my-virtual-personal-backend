@@ -1,4 +1,5 @@
 import {
+  Collection,
   Entity,
   EntityRepositoryType,
   Enum,
@@ -10,12 +11,12 @@ import { ApiProperty } from '@nestjs/swagger';
 import { User } from '../user/user.entity';
 import { UserRole } from '../user/user-role';
 import { Expose, Type } from 'class-transformer';
-import { ProfessionalRepository } from '../../professionals/professionals.repository';
+import { ProfessionalsRepository } from '../../professionals/professionals.repository';
 import { DeafultEntity } from '../default.entity';
 
-@Entity({ repository: () => ProfessionalRepository })
+@Entity({ repository: () => ProfessionalsRepository })
 export class Professionals extends DeafultEntity {
-  [EntityRepositoryType]?: ProfessionalRepository;
+  [EntityRepositoryType]?: ProfessionalsRepository;
 
   @Expose()
   @ApiProperty()
@@ -42,5 +43,5 @@ export class Professionals extends DeafultEntity {
     nullable: true,
     owner: true,
   })
-  users?: User[];
+  users? = new Collection<User>(this);
 }

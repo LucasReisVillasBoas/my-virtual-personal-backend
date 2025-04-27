@@ -1,4 +1,9 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  forwardRef,
+  Inject,
+  Injectable,
+} from '@nestjs/common';
 import { UserRepository } from './user.repository';
 import { User } from 'src/entities/user/user.entity';
 import { UserExistsResponseDto } from './dto/user-exists-response.dto';
@@ -11,14 +16,15 @@ import {
   validateWeight,
 } from '../utils/validation-user.util';
 import { mapUserRole } from 'src/utils/user.util';
-import { ProfessionalService } from 'src/professionals/professionals.service';
+import { ProfessionalsService } from 'src/professionals/professionals.service';
 
 @Injectable()
 export class UserService {
   constructor(
     private readonly userRepository: UserRepository,
     private readonly genderService: GenderService,
-    private readonly professionalService: ProfessionalService,
+    @Inject(forwardRef(() => ProfessionalsService))
+    private readonly professionalsService: ProfessionalsService,
   ) {}
 
   async getByEmail(email: string): Promise<User> {
@@ -107,9 +113,22 @@ export class UserService {
         }
       }
 
-      await this.professionalService.register(user, clients);
+      await this.professionalsService.register(user, clients);
     }
 
+    await this.userRepository.flush();
+
+    return user;
+  }
+
+  async update(id: string, data: Partial<User>): Promise<User> {
+    const user = await this.userRepository.findOne({ id });
+
+    if (!user) {
+      throw new BadRequestException('error-user-not_found');
+    }
+
+    Object.assign(user, data);
     await this.userRepository.flush();
 
     return user;
