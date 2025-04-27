@@ -10,12 +10,15 @@ import {
   validateHeight,
   validateWeight,
 } from '../utils/validation-user.util';
+import { mapUserRole } from 'src/utils/user.util';
+import { ProfessionalRepository } from 'src/professionals/professionals.repository';
 
 @Injectable()
 export class UserService {
   constructor(
     private readonly userRepository: UserRepository,
     private readonly genderService: GenderService,
+    private readonly professionalRepository: ProfessionalRepository,
   ) {}
 
   async getByEmail(email: string): Promise<User> {
@@ -77,9 +80,24 @@ export class UserService {
         userRegisterRequestDto.weight.replace(',', '.'),
       ).toString(),
       gender,
+      role: mapUserRole(userRegisterRequestDto.role),
+      professionals: userRegisterRequestDto.professionals_id
+        ? userRegisterRequestDto.professionals_id
+        : [],
     });
 
+    if (
+      userRegisterRequestDto.role === 'personal_trainer' ||
+      userRegisterRequestDto.role === 'nutritionist'
+    ) {
+      this.professionalRepository.create({
+        name: userRegisterRequestDto.fullName,
+        type: mapUserRole(userRegisterRequestDto.role),
+      });
+    }
+
     await this.userRepository.flush();
+    await this.professionalRepository.flush();
 
     return user;
   }

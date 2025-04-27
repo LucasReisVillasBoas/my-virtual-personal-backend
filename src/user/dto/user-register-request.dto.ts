@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Exclude, Expose } from 'class-transformer';
-import { IsEmail, IsOptional, IsString } from 'class-validator';
+import { IsArray, IsEmail, IsOptional, IsString } from 'class-validator';
 
 @Exclude()
 export class UserRegisterRequestDto {
@@ -45,4 +45,21 @@ export class UserRegisterRequestDto {
   @IsString()
   @IsEmail()
   email: string;
+
+  @Expose()
+  @ApiProperty()
+  @IsString()
+  role: string;
+
+  @Expose()
+  @ApiProperty()
+  @IsString()
+  @IsOptional()
+  clients_id: string;
+
+  @Expose()
+  @ApiProperty()
+  @IsArray()
+  @IsOptional()
+  professionals_id: string[];
 }
