@@ -11,14 +11,14 @@ import {
   validateWeight,
 } from '../utils/validation-user.util';
 import { mapUserRole } from 'src/utils/user.util';
-import { ProfessionalRepository } from 'src/professionals/professionals.repository';
+import { ProfessionalService } from 'src/professionals/professionals.service';
 
 @Injectable()
 export class UserService {
   constructor(
     private readonly userRepository: UserRepository,
     private readonly genderService: GenderService,
-    private readonly professionalRepository: ProfessionalRepository,
+    private readonly professionalService: ProfessionalService,
   ) {}
 
   async getByEmail(email: string): Promise<User> {
@@ -90,14 +90,27 @@ export class UserService {
       userRegisterRequestDto.role === 'personal_trainer' ||
       userRegisterRequestDto.role === 'nutritionist'
     ) {
-      this.professionalRepository.create({
-        name: userRegisterRequestDto.fullName,
-        type: mapUserRole(userRegisterRequestDto.role),
-      });
+      const clients: User[] = [];
+      if (
+        userRegisterRequestDto.clients_id &&
+        userRegisterRequestDto.clients_id.length > 0
+      ) {
+        for (const clientId of userRegisterRequestDto.clients_id) {
+          const client = await this.userRepository.findOne({
+            id: clientId,
+          });
+          if (client) {
+            clients.push(client);
+          } else {
+            throw new BadRequestException('error-client-not-found');
+          }
+        }
+      }
+
+      await this.professionalService.register(user, clients);
     }
 
     await this.userRepository.flush();
-    await this.professionalRepository.flush();
 
     return user;
   }

@@ -53,9 +53,9 @@ export class UserRegisterRequestDto {
 
   @Expose()
   @ApiProperty()
-  @IsString()
+  @IsArray()
   @IsOptional()
-  clients_id: string;
+  clients_id: string[];
 
   @Expose()
   @ApiProperty()
