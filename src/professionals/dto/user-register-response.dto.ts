@@ -1,13 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Exclude, Expose } from 'class-transformer';
-import { IsArray, IsEmail, IsOptional, IsString } from 'class-validator';
+import { Expose } from 'class-transformer';
+import { IsEmail, IsOptional, IsString } from 'class-validator';
+import { BaseResponse } from '../../dto/base-response.dto';
 
-@Exclude()
-export class UserRegisterRequestDto {
+export class UserResponseData {
   @Expose()
   @ApiProperty()
   @IsString()
-  password: string;
+  id: string;
 
   @Expose()
   @ApiProperty()
@@ -18,7 +18,7 @@ export class UserRegisterRequestDto {
   @ApiProperty()
   @IsString()
   @IsOptional()
-  nickname: string;
+  nickname?: string;
 
   @Expose()
   @ApiProperty()
@@ -38,28 +38,14 @@ export class UserRegisterRequestDto {
   @Expose()
   @ApiProperty()
   @IsString()
-  genderId: string;
-
-  @Expose()
-  @ApiProperty()
-  @IsString()
   @IsEmail()
   email: string;
-
-  @Expose()
-  @ApiProperty()
-  @IsString()
-  role: string;
-
-  @Expose()
-  @ApiProperty()
-  @IsArray()
-  @IsOptional()
-  clients_id: string[];
-
-  @Expose()
-  @ApiProperty()
-  @IsArray()
-  @IsOptional()
-  professionals_id: string[];
 }
+
+class UserResponseDto {
+  @Expose()
+  @ApiProperty()
+  user: UserResponseData;
+}
+
+export class UserRegisterResponseDto extends BaseResponse<UserResponseDto> {}
