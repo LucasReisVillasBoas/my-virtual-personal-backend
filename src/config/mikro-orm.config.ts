@@ -7,11 +7,13 @@ import { Restriction } from '../entities/restriction/restriction.entity';
 import { TrainingType } from '../entities/training/training-type.entity';
 import { Exercise } from '../entities/exercise/exercise.entity';
 import { Professionals } from '../entities/professionals/professionals.entity';
+import * as dotenv from 'dotenv';
 
+dotenv.config();
 export default defineConfig({
-  dbName: 'my-personal-db' /* passar para um .env */,
-  user: 'postgres',
-  password: 'postgres123',
+  dbName: process.env.DATABASE_NAME,
+  user: process.env.DATABASE_USER,
+  password: process.env.DATABASE_PASSWORD,
   entities: [
     User,
     Gender,
