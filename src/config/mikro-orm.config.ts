@@ -7,11 +7,12 @@ import { Restriction } from '../entities/restriction/restriction.entity';
 import { TrainingType } from '../entities/training/training-type.entity';
 import { Exercise } from '../entities/exercise/exercise.entity';
 import { Professionals } from '../entities/professionals/professionals.entity';
+import { DATABASE_NAME, DATABASE_PASSWORD, DATABASE_USER } from '../settings';
 
 export default defineConfig({
-  dbName: 'my-personal-db' /* passar para um .env */,
-  user: 'postgres',
-  password: 'postgres123',
+  dbName: DATABASE_NAME,
+  user: DATABASE_USER,
+  password: DATABASE_PASSWORD,
   entities: [
     User,
     Gender,

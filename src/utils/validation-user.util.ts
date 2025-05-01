@@ -1,9 +1,11 @@
+import { MAX_HEIGTH, MAX_WEIGHT, MIN_HEIGTH, MIN_WEIGHT } from '../settings';
+
 export function validateWeight(weight: string): boolean {
   const weightNum = parseFloat(weight);
   if (isNaN(weightNum)) {
     return false;
   }
-  return weightNum >= 1 && weightNum <= 999;
+  return weightNum >= MIN_WEIGHT && weightNum <= MAX_WEIGHT;
 }
 
 export function validateHeight(height: string): boolean {
@@ -11,7 +13,7 @@ export function validateHeight(height: string): boolean {
   if (isNaN(heightNum)) {
     return false;
   }
-  return heightNum >= 50 && heightNum <= 250;
+  return heightNum >= MIN_HEIGTH && heightNum <= MAX_HEIGTH;
 }
 
 export function validateAge(userAge: string): boolean {
