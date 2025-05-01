@@ -7,13 +7,12 @@ import { Restriction } from '../entities/restriction/restriction.entity';
 import { TrainingType } from '../entities/training/training-type.entity';
 import { Exercise } from '../entities/exercise/exercise.entity';
 import { Professionals } from '../entities/professionals/professionals.entity';
-import * as dotenv from 'dotenv';
+import { DATABASE_NAME, DATABASE_PASSWORD, DATABASE_USER } from '../settings';
 
-dotenv.config();
 export default defineConfig({
-  dbName: process.env.DATABASE_NAME,
-  user: process.env.DATABASE_USER,
-  password: process.env.DATABASE_PASSWORD,
+  dbName: DATABASE_NAME,
+  user: DATABASE_USER,
+  password: DATABASE_PASSWORD,
   entities: [
     User,
     Gender,
