@@ -1,4 +1,7 @@
-import assert from 'assert';
+import * as assert from 'assert';
+import * as dotenv from 'dotenv';
+import * as path from 'path';
+dotenv.config({ path: path.join(__dirname, '../.env') }); // Ajuste se necessário
 
 export function getEnvOrThrow(envName: string): string {
   const env = process.env[envName];
