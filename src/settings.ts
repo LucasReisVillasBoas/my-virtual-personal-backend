@@ -5,7 +5,7 @@ dotenv.config({ path: path.join(__dirname, '../.env') }); // Ajuste se necessár
 
 export function getEnvOrThrow(envName: string): string {
   const env = process.env[envName];
-  assert(env, `Missing environment variable ${envName}`);
+  assert.ok(env, `Missing environment variable ${envName}`);
   return env;
 }
 
