@@ -13,6 +13,7 @@ import { TrainingRepository } from '../../training/training.repository';
 import { TrainingType } from './training-type.entity';
 import { Goals } from '../goals/goals.entity';
 import { TrainingExercise } from '../training-exercise/training-exercise.entity';
+import { User } from '../user/user.entity';
 
 @Entity({ repository: () => TrainingRepository })
 export class Training extends DeafultEntity {
@@ -45,4 +46,10 @@ export class Training extends DeafultEntity {
   @Type(() => TrainingExercise)
   @OneToMany(() => TrainingExercise, (item) => item.training)
   trainingExerciseList?: TrainingExercise[];
+
+  @Expose()
+  @ApiProperty({ type: () => User })
+  @Type(() => User)
+  @ManyToOne({ entity: () => User, index: true })
+  user: User;
 }
