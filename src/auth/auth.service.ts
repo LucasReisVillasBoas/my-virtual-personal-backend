@@ -1,10 +1,10 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-//import * as bcrypt from 'bcryptjs';
 import { UserService } from 'src/user/user.service';
 import { LoginDto } from './dto/login.dto';
 import { LoginResponseDto } from './dto/login-response.dto';
 import { User } from 'src/entities/user/user.entity';
+import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class AuthService {
@@ -18,15 +18,23 @@ export class AuthService {
 
     const user = await this.userService.getByEmail(email);
 
-    if (!user || password !== user.password) {
+    if (!user || !(await this.comparePasswords(password, user.password))) {
       return null;
     }
 
     return user;
   }
 
+  private async comparePasswords(
+    plainPassword: string,
+    hashedPassword: string,
+  ): Promise<boolean> {
+    return bcrypt.compare(plainPassword, hashedPassword);
+  }
+
   async login(loginDto: LoginDto): Promise<LoginResponseDto> {
     const user: User = await this.validateLogin(loginDto);
+
     if (!user) {
       throw new BadRequestException('error-user-not_found');
     }

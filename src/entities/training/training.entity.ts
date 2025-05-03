@@ -10,7 +10,6 @@ import { Expose, Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 import { DeafultEntity } from '../default.entity';
 import { TrainingRepository } from '../../training/training.repository';
-import { User } from '../user/user.entity';
 import { TrainingType } from './training-type.entity';
 import { Goals } from '../goals/goals.entity';
 import { TrainingExercise } from '../training-exercise/training-exercise.entity';
@@ -28,12 +27,6 @@ export class Training extends DeafultEntity {
   @ApiProperty()
   @Property()
   active: boolean;
-
-  @Expose({ toClassOnly: true })
-  @ApiProperty({ type: () => User })
-  @Type(() => User)
-  @ManyToOne({ entity: () => User, index: true })
-  user: User;
 
   @Expose()
   @ApiProperty()

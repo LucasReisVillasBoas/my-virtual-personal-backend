@@ -1,8 +1,7 @@
 import {
-  Collection,
   Entity,
   EntityRepositoryType,
-  ManyToMany,
+  ManyToOne,
   OneToMany,
   PrimaryKey,
   Property,
@@ -25,7 +24,7 @@ export class Exercise extends DeafultEntity {
 
   @Expose()
   @ApiProperty()
-  @Property({ nullable: false })
+  @Property({ nullable: false, unique: true })
   code: string;
 
   @Expose()
@@ -39,10 +38,9 @@ export class Exercise extends DeafultEntity {
   @OneToMany(() => TrainingExercise, (item) => item.exercise)
   trainingExerciseList?: TrainingExercise[];
 
-  @Expose()
-  @ApiProperty({ type: () => MuscleGroup, isArray: true })
-  @ManyToMany(() => MuscleGroup, (muscleGroup) => muscleGroup.exerciseList, {
-    owner: true,
-  })
-  muscleGroupList = new Collection<MuscleGroup>(this);
+  @Expose({ toClassOnly: true })
+  @ApiProperty({ type: () => MuscleGroup })
+  @Type(() => MuscleGroup)
+  @ManyToOne({ entity: () => MuscleGroup, index: true, nullable: true })
+  muscleGroup: MuscleGroup;
 }

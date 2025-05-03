@@ -13,7 +13,6 @@ import { DeafultEntity } from '../default.entity';
 import { Goals } from '../goals/goals.entity';
 import { Gender } from '../gender/gender.entity';
 import { Restriction } from '../restriction/restriction.entity';
-import { Training } from '../training/training.entity';
 
 @Entity({ repository: () => UserRepository })
 export class User extends DeafultEntity {
@@ -76,10 +75,4 @@ export class User extends DeafultEntity {
   @Type(() => Goals)
   @OneToMany(() => Goals, (item) => item.user)
   goalsList?: Goals[];
-
-  @Expose()
-  @ApiProperty({ type: () => Training, isArray: true })
-  @Type(() => Training)
-  @OneToMany(() => Training, (item) => item.user)
-  trainingList?: Training[];
 }

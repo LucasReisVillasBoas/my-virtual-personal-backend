@@ -10,6 +10,8 @@ import {
   validateHeight,
   validateWeight,
 } from '../utils/validation-user.util';
+import * as bcrypt from 'bcryptjs';
+import { validatePassword } from '../utils/auth.util';
 
 @Injectable()
 export class UserService {
@@ -17,7 +19,6 @@ export class UserService {
     private readonly userRepository: UserRepository,
     private readonly genderService: GenderService,
   ) {}
-
   async getByEmail(email: string): Promise<User> {
     const person = await this.userRepository.findOne({ email });
     return person;
@@ -35,39 +36,21 @@ export class UserService {
   async register(
     userRegisterRequestDto: UserRegisterRequestDto,
   ): Promise<User> {
-    const userExistsRequestDto = new UserExistsRequestDto();
-    userExistsRequestDto.email = userRegisterRequestDto.email;
-
-    const userExistsReponseDto = await this.exists(userExistsRequestDto);
-
-    if (userExistsReponseDto.exists) {
-      throw new BadRequestException('error-user-exists');
-    }
+    await this.handleUser(userRegisterRequestDto);
 
     const gender = await this.genderService.getById(
       userRegisterRequestDto.genderId,
     );
-
     if (!gender) {
       throw new BadRequestException('error-gender-not_found');
     }
 
-    if (!validateAge(userRegisterRequestDto.age)) {
-      throw new BadRequestException('error-user-age-invalid');
-    }
-
-    if (!validateWeight(userRegisterRequestDto.weight)) {
-      throw new BadRequestException('error-user-weight-invalid');
-    }
-
-    if (!validateHeight(userRegisterRequestDto.height)) {
-      throw new BadRequestException('error-user-height-invalid');
-    }
-
-    /* encrypt password */
+    const hashedPassword = await this.hashPassword(
+      userRegisterRequestDto.password,
+    );
 
     const user = this.userRepository.create({
-      password: userRegisterRequestDto.password,
+      password: hashedPassword,
       email: userRegisterRequestDto.email,
       fullName: userRegisterRequestDto.fullName,
       nickname: userRegisterRequestDto.nickname,
@@ -82,5 +65,45 @@ export class UserService {
     await this.userRepository.flush();
 
     return user;
+  }
+
+  private async checkIfUserExists(email: string): Promise<void> {
+    const userExistsRequestDto = new UserExistsRequestDto();
+    userExistsRequestDto.email = email;
+
+    const userExistsResponseDto = await this.exists(userExistsRequestDto);
+    if (userExistsResponseDto.exists) {
+      throw new BadRequestException('error-user-exists');
+    }
+  }
+
+  private validateAnthropometricData(user: UserRegisterRequestDto) {
+    if (!validateAge(user.age)) {
+      throw new BadRequestException('error-user-age-invalid');
+    }
+
+    if (!validateWeight(user.weight)) {
+      throw new BadRequestException('error-user-weight-invalid');
+    }
+
+    if (!validateHeight(user.height)) {
+      throw new BadRequestException('error-user-height-invalid');
+    }
+  }
+
+  private async hashPassword(password: string): Promise<string> {
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    return hashedPassword;
+  }
+
+  private async handleUser(user: UserRegisterRequestDto) {
+    this.checkIfUserExists(user.email);
+
+    this.validateAnthropometricData(user);
+
+    if (!validatePassword(user.password)) {
+      throw new BadRequestException('error-user-password-invalid');
+    }
   }
 }
