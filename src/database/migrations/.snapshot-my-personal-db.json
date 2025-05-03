@@ -57,77 +57,6 @@
           "mappedType": "string"
         }
       },
-      "name": "exercise",
-      "schema": "public",
-      "indexes": [
-        {
-          "keyName": "exercise_pkey",
-          "columnNames": [
-            "id"
-          ],
-          "composite": false,
-          "constraint": true,
-          "primary": true,
-          "unique": true
-        }
-      ],
-      "checks": [],
-      "foreignKeys": {},
-      "nativeEnums": {}
-    },
-    {
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "uuid",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "default": "gen_random_uuid()",
-          "mappedType": "uuid"
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamptz",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "length": 6,
-          "mappedType": "datetime"
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamptz",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "length": 6,
-          "mappedType": "datetime"
-        },
-        "code": {
-          "name": "code",
-          "type": "varchar(255)",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "length": 255,
-          "mappedType": "string"
-        },
-        "description": {
-          "name": "description",
-          "type": "varchar(255)",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "length": 255,
-          "mappedType": "string"
-        }
-      },
       "name": "gender",
       "schema": "public",
       "indexes": [
@@ -213,6 +142,16 @@
       "schema": "public",
       "indexes": [
         {
+          "columnNames": [
+            "code"
+          ],
+          "composite": false,
+          "keyName": "muscle_group_code_unique",
+          "constraint": true,
+          "primary": false,
+          "unique": true
+        },
+        {
           "keyName": "muscle_group_pkey",
           "columnNames": [
             "id"
@@ -229,14 +168,55 @@
     },
     {
       "columns": {
-        "exercise_id": {
-          "name": "exercise_id",
+        "id": {
+          "name": "id",
           "type": "uuid",
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
           "nullable": false,
+          "default": "gen_random_uuid()",
           "mappedType": "uuid"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamptz",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 6,
+          "mappedType": "datetime"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamptz",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 6,
+          "mappedType": "datetime"
+        },
+        "code": {
+          "name": "code",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 255,
+          "mappedType": "string"
+        },
+        "description": {
+          "name": "description",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 255,
+          "mappedType": "string"
         },
         "muscle_group_id": {
           "name": "muscle_group_id",
@@ -244,20 +224,39 @@
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
-          "nullable": false,
+          "nullable": true,
           "mappedType": "uuid"
         }
       },
-      "name": "exercise_muscle_group_list",
+      "name": "exercise",
       "schema": "public",
       "indexes": [
         {
-          "keyName": "exercise_muscle_group_list_pkey",
           "columnNames": [
-            "exercise_id",
+            "code"
+          ],
+          "composite": false,
+          "keyName": "exercise_code_unique",
+          "constraint": true,
+          "primary": false,
+          "unique": true
+        },
+        {
+          "columnNames": [
             "muscle_group_id"
           ],
-          "composite": true,
+          "composite": false,
+          "keyName": "exercise_muscle_group_id_index",
+          "constraint": false,
+          "primary": false,
+          "unique": false
+        },
+        {
+          "keyName": "exercise_pkey",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
           "constraint": true,
           "primary": true,
           "unique": true
@@ -265,30 +264,17 @@
       ],
       "checks": [],
       "foreignKeys": {
-        "exercise_muscle_group_list_exercise_id_foreign": {
-          "constraintName": "exercise_muscle_group_list_exercise_id_foreign",
-          "columnNames": [
-            "exercise_id"
-          ],
-          "localTableName": "public.exercise_muscle_group_list",
-          "referencedColumnNames": [
-            "id"
-          ],
-          "referencedTableName": "public.exercise",
-          "deleteRule": "cascade",
-          "updateRule": "cascade"
-        },
-        "exercise_muscle_group_list_muscle_group_id_foreign": {
-          "constraintName": "exercise_muscle_group_list_muscle_group_id_foreign",
+        "exercise_muscle_group_id_foreign": {
+          "constraintName": "exercise_muscle_group_id_foreign",
           "columnNames": [
             "muscle_group_id"
           ],
-          "localTableName": "public.exercise_muscle_group_list",
+          "localTableName": "public.exercise",
           "referencedColumnNames": [
             "id"
           ],
           "referencedTableName": "public.muscle_group",
-          "deleteRule": "cascade",
+          "deleteRule": "set null",
           "updateRule": "cascade"
         }
       },
@@ -492,6 +478,16 @@
       "name": "training_type",
       "schema": "public",
       "indexes": [
+        {
+          "columnNames": [
+            "code"
+          ],
+          "composite": false,
+          "keyName": "training_type_code_unique",
+          "constraint": true,
+          "primary": false,
+          "unique": true
+        },
         {
           "keyName": "training_type_pkey",
           "columnNames": [
@@ -928,15 +924,6 @@
           "nullable": false,
           "mappedType": "boolean"
         },
-        "user_id": {
-          "name": "user_id",
-          "type": "uuid",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "mappedType": "uuid"
-        },
         "training_type_id": {
           "name": "training_type_id",
           "type": "uuid",
@@ -959,16 +946,6 @@
       "name": "training",
       "schema": "public",
       "indexes": [
-        {
-          "columnNames": [
-            "user_id"
-          ],
-          "composite": false,
-          "keyName": "training_user_id_index",
-          "constraint": false,
-          "primary": false,
-          "unique": false
-        },
         {
           "columnNames": [
             "training_type_id"
@@ -1002,18 +979,6 @@
       ],
       "checks": [],
       "foreignKeys": {
-        "training_user_id_foreign": {
-          "constraintName": "training_user_id_foreign",
-          "columnNames": [
-            "user_id"
-          ],
-          "localTableName": "public.training",
-          "referencedColumnNames": [
-            "id"
-          ],
-          "referencedTableName": "public.user",
-          "updateRule": "cascade"
-        },
         "training_training_type_id_foreign": {
           "constraintName": "training_training_type_id_foreign",
           "columnNames": [

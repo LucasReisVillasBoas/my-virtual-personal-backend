@@ -20,7 +20,7 @@ export class TrainingType extends DeafultEntity {
 
   @Expose()
   @ApiProperty()
-  @Property({ nullable: false })
+  @Property({ nullable: false, unique: true })
   code: string;
 
   @Expose()

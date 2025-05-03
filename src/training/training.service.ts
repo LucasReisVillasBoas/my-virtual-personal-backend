@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { TrainingRepository } from './training.repository';
 import { TrainingTypeRepository } from './training-type.repository';
+import { TrainingTypeResponseDto } from './dto/training-type-response.dto';
 
 @Injectable()
 export class TrainingService {
@@ -9,5 +10,10 @@ export class TrainingService {
     private readonly trainingTypeRepository: TrainingTypeRepository,
   ) {}
 
-  //async getByEmail(email: string): Promise<> {}
+  async getAll(): Promise<TrainingTypeResponseDto[]> {
+    const trainingTypeList = await this.trainingTypeRepository.findAll({
+      exclude: ['createdAt', 'updatedAt'],
+    });
+    return trainingTypeList;
+  }
 }

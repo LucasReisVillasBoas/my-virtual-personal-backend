@@ -13,6 +13,7 @@ import { GoalsModule } from './goals/goals.module';
 import { GenderModule } from './gender/gender.module';
 import { ExerciseModule } from './exercise/exercise.module';
 import { ProfessionalsModule } from './professionals/professionals.module';
+import { GeminiModule } from './gemini/gemini.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { ProfessionalsModule } from './professionals/professionals.module';
     GenderModule,
     ExerciseModule,
     ProfessionalsModule,
+    GeminiModule,
   ],
   controllers: [AppController],
   providers: [AppService],
