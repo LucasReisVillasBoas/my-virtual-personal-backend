@@ -26,8 +26,17 @@ export class ExerciseSeeder extends Seeder {
     const backGroup = muscleGroups.find(
       (group) => group.description === 'Costas',
     );
-    const legsGroup = muscleGroups.find(
-      (group) => group.description === 'Pernas',
+    const quadricepsGroup = muscleGroups.find(
+      (group) => group.description === 'Quadríceps',
+    );
+    const posteriorGroup = muscleGroups.find(
+      (group) => group.description === 'Posterior de Coxa',
+    );
+    const glutealGroup = muscleGroups.find(
+      (group) => group.description === 'Glúteos',
+    );
+    const calfGroup = muscleGroups.find(
+      (group) => group.description === 'Panturrilha',
     );
     const absGroup = muscleGroups.find(
       (group) => group.description === 'Abdômen',
@@ -39,7 +48,10 @@ export class ExerciseSeeder extends Seeder {
       biceps: bicepsGroup,
       triceps: tricepsGroup,
       back: backGroup,
-      legs: legsGroup,
+      quadriceps: quadricepsGroup,
+      posterior: posteriorGroup,
+      gluteal: glutealGroup,
+      calf: calfGroup,
       abs: absGroup,
     };
 
@@ -47,16 +59,21 @@ export class ExerciseSeeder extends Seeder {
       const group = muscleGroupMap[groupKey];
       const exercisesData = exercisesByest[groupKey];
 
-      const exercises = exercisesData.map(({ code, description }) => {
-        return em.create(Exercise, {
-          id: randomUUID(),
-          code,
-          description,
-          createdAt: date,
-          updatedAt: date,
-          muscleGroup: group,
-        });
-      });
+      const exercises = [];
+      for (const { code, description } of exercisesData) {
+        const existingExercise = await em.findOne(Exercise, { code });
+        if (!existingExercise) {
+          const exercise = em.create(Exercise, {
+            id: randomUUID(),
+            code,
+            description,
+            createdAt: date,
+            updatedAt: date,
+            muscleGroup: group,
+          });
+          exercises.push(exercise);
+        }
+      }
 
       await em.persistAndFlush(exercises);
     };
@@ -67,7 +84,10 @@ export class ExerciseSeeder extends Seeder {
     await persistExercises('biceps');
     await persistExercises('triceps');
     await persistExercises('back');
-    await persistExercises('legs');
+    await persistExercises('quadriceps');
+    await persistExercises('posterior');
+    await persistExercises('gluteal');
+    await persistExercises('calf');
     await persistExercises('abs');
   }
 }

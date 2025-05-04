@@ -941,6 +941,15 @@
           "primary": false,
           "nullable": true,
           "mappedType": "uuid"
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "uuid"
         }
       },
       "name": "training",
@@ -962,6 +971,16 @@
           ],
           "composite": false,
           "keyName": "training_goals_id_index",
+          "constraint": false,
+          "primary": false,
+          "unique": false
+        },
+        {
+          "columnNames": [
+            "user_id"
+          ],
+          "composite": false,
+          "keyName": "training_user_id_index",
           "constraint": false,
           "primary": false,
           "unique": false
@@ -1002,6 +1021,18 @@
           ],
           "referencedTableName": "public.goals",
           "deleteRule": "set null",
+          "updateRule": "cascade"
+        },
+        "training_user_id_foreign": {
+          "constraintName": "training_user_id_foreign",
+          "columnNames": [
+            "user_id"
+          ],
+          "localTableName": "public.training",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "public.user",
           "updateRule": "cascade"
         }
       },
