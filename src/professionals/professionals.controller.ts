@@ -17,9 +17,9 @@ export class ProfessionalsController {
   @Post('register/user')
   async register(
     @Body() userRegisterRequestDto: UserRegisterRequestDto,
-    @Query('userId') userId: string,
+    @Query('id') id: string,
   ): Promise<UserRegisterResponseDto> {
-    await this.professionalsService.addUser(userRegisterRequestDto, userId);
+    await this.professionalsService.addUser(userRegisterRequestDto, id);
     const userRegisterResponseDto = new UserRegisterResponseDto();
 
     userRegisterResponseDto.message = 'User added to Professional';
