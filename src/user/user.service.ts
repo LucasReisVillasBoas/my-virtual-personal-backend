@@ -28,9 +28,20 @@ export class UserService {
     @Inject(forwardRef(() => ProfessionalsService))
     private readonly professionalsService: ProfessionalsService,
   ) {}
+
+  async getAll(): Promise<User[]> {
+    const userList = await this.userRepository.findAll();
+    return userList;
+  }
+
   async getByEmail(email: string): Promise<User> {
     const person = await this.userRepository.findOne({ email });
     return person;
+  }
+
+  async getById(id: string): Promise<User> {
+    const user = await this.userRepository.findOne({ id });
+    return user;
   }
 
   async exists(
@@ -115,6 +126,18 @@ export class UserService {
     await this.userRepository.flush();
 
     return user;
+  }
+
+  async delete(id: string): Promise<boolean> {
+    const user = await this.userRepository.findOne({ id });
+
+    if (!user) {
+      throw new BadRequestException('error-user-not_found');
+    }
+
+    const userDeleted = this.userRepository.remove(user);
+    await this.userRepository.flush();
+    return userDeleted != null;
   }
 
   private async checkIfUserExists(email: string): Promise<void> {
