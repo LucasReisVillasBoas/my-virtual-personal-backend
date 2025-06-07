@@ -6,11 +6,11 @@ import {
 } from '@nestjs/common';
 import { Professionals } from '../entities/professionals/professionals.entity';
 import { User } from 'src/entities/user/user.entity';
-import { UserRegisterRequestDto } from 'src/professionals/dto/user-register-request.dto';
 import { UserExistsRequestDto } from 'src/user/dto/user-exists-request.dto';
 import { UserService } from '../user/user.service';
 import { ProfessionalsRepository } from './professionals.repository';
 import { InjectRepository } from '@mikro-orm/nestjs';
+import { UserRegisterRequestDto } from 'src/user/dto/user-register-request.dto';
 
 @Injectable()
 export class ProfessionalsService {
@@ -21,6 +21,11 @@ export class ProfessionalsService {
     private readonly userService: UserService,
   ) {}
 
+  async getAll(): Promise<Professionals[]> {
+    const professionals = await this.professionalsRepository.findAll();
+    return professionals;
+  }
+
   async getById(id: string): Promise<Professionals> {
     const professional = await this.professionalsRepository.findOne({ id });
     return professional;
@@ -29,6 +34,7 @@ export class ProfessionalsService {
   async register(user: User, clients: User[]): Promise<void> {
     this.professionalsRepository.create({
       name: user.fullName,
+      email: user.email,
       type: user.role,
       users: clients,
     });
@@ -72,5 +78,33 @@ export class ProfessionalsService {
     await this.professionalsRepository.flush();
 
     return professional;
+  }
+
+  async updateByEmail(
+    email: string,
+    data: Partial<Professionals>,
+  ): Promise<Professionals> {
+    const professional = await this.professionalsRepository.findOne({ email });
+
+    if (!professional) {
+      throw new BadRequestException('error-professional-not_found');
+    }
+
+    Object.assign(professional, data);
+    await this.professionalsRepository.flush();
+
+    return professional;
+  }
+
+  async delete(id: string): Promise<boolean> {
+    const user = await this.professionalsRepository.findOne({ id });
+
+    if (!user) {
+      throw new BadRequestException('error-professional-not_found');
+    }
+
+    const userDeleted = this.professionalsRepository.remove(user);
+    await this.professionalsRepository.flush();
+    return userDeleted != null;
   }
 }

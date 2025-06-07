@@ -19,6 +19,7 @@ import { mapUserRole } from 'src/utils/user.util';
 import { ProfessionalsService } from 'src/professionals/professionals.service';
 import * as bcrypt from 'bcryptjs';
 import { validatePassword } from '../utils/auth.util';
+import { Professionals } from 'src/entities/professionals/professionals.entity';
 
 @Injectable()
 export class UserService {
@@ -122,6 +123,16 @@ export class UserService {
       throw new BadRequestException('error-user-not_found');
     }
 
+    if (user.role === 'personal_trainer' || user.role === 'nutritionist') {
+      const professionalData: Partial<Professionals> = {
+        name: data.fullName,
+        email: data.email,
+      };
+      await this.professionalsService.updateByEmail(
+        data.email,
+        professionalData,
+      );
+    }
     Object.assign(user, data);
     await this.userRepository.flush();
 
