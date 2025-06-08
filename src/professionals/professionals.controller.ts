@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   HttpStatus,
+  Param,
   Post,
   Put,
   Query,
@@ -95,8 +96,8 @@ export class ProfessionalsController {
     type: UserResponseDto,
     description: 'User deleted successfully',
   })
-  @Delete('/')
-  async delete(@Query('id') id: string) {
+  @Delete('/:id')
+  async delete(@Param('id') id: string) {
     const userUpdated = await this.professionalsService.delete(id);
 
     return new UserResponseDto('User deleted successfully', 200, {

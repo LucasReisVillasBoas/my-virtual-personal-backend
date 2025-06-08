@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Param,
   Post,
   Put,
   Query,
@@ -59,7 +60,7 @@ export class UserController {
     type: Array<UserRegisterResponseDto>,
     description: 'Users found',
   })
-  @Get('/all')
+  @Get('/')
   async getAll() {
     const userList = await this.userService.getAll();
 
@@ -95,12 +96,12 @@ export class UserController {
     type: UserResponseDto,
     description: 'User deleted successfully',
   })
-  @Delete('/')
-  async delete(@Query('id') id: string) {
-    const userUpdated = await this.userService.delete(id);
+  @Delete('/:id')
+  async delete(@Param('id') id: string) {
+    const userDeleted = await this.userService.delete(id);
 
     return new UserResponseDto('User deleted successfully', 200, {
-      data: { userDeleted: userUpdated },
+      data: { userDeleted: userDeleted },
     });
   }
 }
