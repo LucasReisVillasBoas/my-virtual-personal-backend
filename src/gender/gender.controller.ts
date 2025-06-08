@@ -16,7 +16,7 @@ export class GenderController {
     description: 'Gender list',
     isArray: true,
   })
-  @Get()
+  @Get('/all')
   async list(): Promise<GenderResponseDto[]> {
     const genderList = await this.genderService.getAll();
     return genderList;

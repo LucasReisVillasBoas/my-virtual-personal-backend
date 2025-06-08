@@ -11,8 +11,7 @@ import {
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Restriction } from 'src/entities/restriction/restriction.entity';
 import {
-  RestrictionDefaultResponseDto,
-  RestrictionResponseData,
+  RestrictionDefaultResponseDto
 } from 'src/restriction/dto/restriction-default-response.dto';
 import { RestrictionRegisterRequestDto } from 'src/restriction/dto/restriction-register-request.dto';
 import { RestrictionRegisterResponseDto } from 'src/restriction/dto/restriction-register-response.dto';
@@ -47,7 +46,7 @@ export class RestrictionController {
     type: RestrictionResponseDto,
     description: 'Restrictions list',
   })
-  @Get()
+  @Get('/all')
   async list(): Promise<RestrictionResponseDto[]> {
     const restrictions = await this.restrictionService.getAll();
     return restrictions;

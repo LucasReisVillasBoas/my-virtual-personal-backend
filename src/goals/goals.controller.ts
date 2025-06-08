@@ -15,7 +15,6 @@ import { GoalRegisterResponseDto } from 'src/goals/dto/goal-register-response.dt
 import { GoalResponseDto } from 'src/goals/dto/goal-response.dto';
 import { GoalsResponseDto } from 'src/goals/dto/goals-response.dto';
 import { GoalsService } from 'src/goals/goals.service';
-import { UserRegisterResponseDto } from 'src/user/dto/user-register-response.dto';
 
 @Controller('goals')
 @ApiTags('Goals')
@@ -45,7 +44,7 @@ export class GoalsController {
     type: GoalResponseDto,
     description: 'Goals list',
   })
-  @Get()
+  @Get('/all')
   async list(): Promise<GoalsResponseDto[]> {
     const goals = await this.goalsService.getAll();
     return goals;
@@ -57,7 +56,7 @@ export class GoalsController {
     description: 'Goals details',
   })
   @Get('/')
-  async getById(@Query('goalId') goalId: string): Promise<GoalResponseDto> {
+  async getById(@Query('id') goalId: string): Promise<GoalResponseDto> {
     const goals = await this.goalsService.getById(goalId);
 
     return new GoalResponseDto('Goals retrieved', 200, {

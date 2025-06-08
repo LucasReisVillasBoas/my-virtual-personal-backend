@@ -1,18 +1,17 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
-import { TrainingExerciseRepository } from './training-exercise.repository';
+import { BadRequestException, forwardRef, Inject, Injectable } from '@nestjs/common';
 import { TrainingExercise } from 'src/entities/training-exercise/training-exercise.entity';
+import { ExerciseService } from 'src/exercise/exercise.service';
+import { TrainingExerciseResponseData } from 'src/training-exercise/dto/training-exercise-default-response.dto';
 import { TrainingExerciseRegisterRequestDto } from 'src/training-exercise/dto/training-exercise-register-request.dto';
 import { TrainingService } from 'src/training/training.service';
-import { ExerciseRepository } from 'src/exercise/exercise.repository';
-import { TrainingExerciseResponseData, TrainingExerciseResponseDto } from 'src/training-exercise/dto/training-exercise-default-response.dto';
-import { TrainingExerciseResponseGenericDto } from 'src/training-exercise/dto/training-exercise-response.dto';
-import { ExerciseService } from 'src/exercise/exercise.service';
+import { TrainingExerciseRepository } from './training-exercise.repository';
 
 @Injectable()
 export class TrainingExerciseService {
   constructor(
     private readonly trainingExerciseRepository: TrainingExerciseRepository,
-    private readonly trainingService: TrainingService,
+     @Inject(forwardRef(() => TrainingService))
+        private readonly trainingService: TrainingService,
     private readonly exerciseService: ExerciseService,
   ) {}
 

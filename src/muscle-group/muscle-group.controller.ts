@@ -16,7 +16,7 @@ export class MuscleGroupController {
     description: 'Muscle Group list',
     isArray: true,
   })
-  @Get()
+  @Get('/all')
   async list(): Promise<MuscleGroupResponseDto[]> {
     const muscleGroupList = await this.muscleGroupService.getAll();
     return muscleGroupList;
@@ -38,8 +38,8 @@ export class MuscleGroupController {
     type: MuscleGroupResponseDto,
     description: 'Muscle Group details by code'
   })
-  @Get()
-  async getByCode(@Query('code') code: string): Promise<MuscleGroupResponseDto> {
+  @Get('/code/:code')
+  async getByCode(@Param('code') code: string): Promise<MuscleGroupResponseDto> {
     const muscleGroup = await this.muscleGroupService.getByCode(code);
     return muscleGroup;
   }

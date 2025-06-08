@@ -1,15 +1,12 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { TrainingRepository } from './training.repository';
-import { TrainingTypeRepository } from './training-type.repository';
-import { TrainingTypeResponseDto } from './dto/training-type-response.dto';
-import { TrainingResponseData, TrainingResponseDto } from 'src/training/dto/training-response.dto';
-import { TrainingRegisterRequestDto } from 'src/training/dto/training-register-request.dto';
 import { Training } from 'src/entities/training/training.entity';
-import { UserRepository } from 'src/user/user.repository';
-import { GoalsRepository } from 'src/goals/goals.repository';
-import { TrainingExerciseRepository } from 'src/training-exercise/training-exercise.repository';
-import { UserService } from 'src/user/user.service';
 import { GoalsService } from 'src/goals/goals.service';
+import { TrainingRegisterRequestDto } from 'src/training/dto/training-register-request.dto';
+import { TrainingResponseData } from 'src/training/dto/training-response.dto';
+import { UserService } from 'src/user/user.service';
+import { TrainingTypeResponseDto } from './dto/training-type-response.dto';
+import { TrainingTypeRepository } from './training-type.repository';
+import { TrainingRepository } from './training.repository';
 import { TrainingExerciseService } from 'src/training-exercise/training-exercise.service';
 
 @Injectable()
@@ -19,17 +16,22 @@ export class TrainingService {
     private readonly trainingTypeRepository: TrainingTypeRepository,
     private readonly userRepository: UserService,
     private readonly goalsRepository: GoalsService,
+    private readonly trainingExerciseService: TrainingExerciseService,
   ) {}
 
   async register(
     trainingRegisterRequestDto: TrainingRegisterRequestDto,
   ): Promise<Training> {
-    const user = await this.userRepository.getById(trainingRegisterRequestDto.userId);
+    const user = await this.userRepository.getById(
+      trainingRegisterRequestDto.userId,
+    );
     if (!user) {
       throw new BadRequestException('error-user-not_found');
     }
 
-    const goals = await this.goalsRepository.getById(trainingRegisterRequestDto.goalsId);
+    const goals = await this.goalsRepository.getById(
+      trainingRegisterRequestDto.goalsId,
+    );
     if (!goals) {
       throw new BadRequestException('error-goals-not_found');
     }
@@ -42,14 +44,26 @@ export class TrainingService {
       throw new BadRequestException('error-training_type-not_found');
     }
 
-    //validar a lista de exercícios
     const training = this.trainingRepository.create({
       active: trainingRegisterRequestDto.active,
       trainingType,
       goals,
-      trainingExerciseList: trainingRegisterRequestDto.trainingExerciseList,
       user,
     });
+
+    if (trainingRegisterRequestDto.trainingExerciseList.length > 0) {
+      const trainingExerciseList =
+        trainingRegisterRequestDto.trainingExerciseList;
+      trainingExerciseList.forEach((exercise) => {
+        return this.trainingExerciseService.create({
+          sets: exercise.sets,
+          reps: exercise.reps,
+          restTime: exercise.rest_time,
+          trainingId: training.id,
+          exerciseCode: exercise.exercise.code,
+        });
+      });
+    }
 
     await this.trainingRepository.flush();
     return training;
@@ -76,28 +90,43 @@ export class TrainingService {
   }
 
   async update(
-      id: string,
-      data: Partial<Training>,
-    ): Promise<TrainingResponseData> {
-      const training = await this.getById(id);
-      if (!training) {
-        throw new BadRequestException('error-training-not_found');
-      }
-  
-      Object.assign(training, data);
-      await this.trainingRepository.flush();
-  
+    id: string,
+    data: Partial<Training>,
+  ): Promise<TrainingResponseData> {
+    const training = await this.getById(id);
+    if (!training) {
+      throw new BadRequestException('error-training-not_found');
+    }
+
+    if (data.trainingExerciseList && data.trainingExerciseList.length > 0) {
+      const trainingExerciseList = data.trainingExerciseList;
+      trainingExerciseList.forEach((exercise) => {
+        return this.trainingExerciseService.create({
+          sets: exercise.sets,
+          reps: exercise.reps,
+          restTime: exercise.rest_time,
+          trainingId: training.id,
+          exerciseCode: exercise.exercise.code,
+        });
+      });
+
       return training;
     }
-  
-    async delete(id: string): Promise<boolean> {
-      const training = await this.getById(id);
-      if (!training) {
-        throw new BadRequestException('error-training-not_found');
-      }
-  
-      const trainingDeleted = this.trainingRepository.remove(training);
-      await this.trainingRepository.flush();
-      return trainingDeleted != null;
+
+    Object.assign(training, data);
+    await this.trainingRepository.flush();
+
+    return training;
+  }
+
+  async delete(id: string): Promise<boolean> {
+    const training = await this.getById(id);
+    if (!training) {
+      throw new BadRequestException('error-training-not_found');
     }
+
+    const trainingDeleted = this.trainingRepository.remove(training);
+    await this.trainingRepository.flush();
+    return trainingDeleted != null;
+  }
 }

@@ -1,10 +1,10 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { GoalsRepository } from './goals.repository';
-import { GoalRegisterRequestDto } from 'src/goals/dto/goal-register-request.dto';
-import { UserService } from 'src/user/user.service';
 import { Goals } from 'src/entities/goals/goals.entity';
+import { GoalRegisterRequestDto } from 'src/goals/dto/goal-register-request.dto';
+import { Goal } from 'src/goals/dto/goal-response.dto';
 import { GoalsResponseDto } from 'src/goals/dto/goals-response.dto';
-import { Goal, GoalResponseDto } from 'src/goals/dto/goal-response.dto';
+import { UserService } from 'src/user/user.service';
+import { GoalsRepository } from './goals.repository';
 
 @Injectable()
 export class GoalsService {
@@ -27,6 +27,7 @@ export class GoalsService {
       code: goalRegisterRequestDto.code,
       description: goalRegisterRequestDto.description,
       active: goalRegisterRequestDto.active,
+      user: user,
     });
 
     await this.goalsRepository.flush();

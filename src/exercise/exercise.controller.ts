@@ -24,7 +24,7 @@ export class ExerciseController {
     description: 'Exercise list',
     isArray: true,
   })
-  @Get()
+  @Get('/all')
   async list(): Promise<ExerciseResponseDto[]> {
     const exerciseList = await this.exerciseService.getAll();
     return exerciseList;

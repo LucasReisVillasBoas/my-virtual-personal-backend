@@ -1,11 +1,11 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { TrainingService } from './training.service';
-import { TrainingTypeResponseDto } from './dto/training-type-response.dto';
-import { TrainingResponseData, TrainingResponseDto } from 'src/training/dto/training-response.dto';
+import { Training } from 'src/entities/training/training.entity';
 import { TrainingRegisterRequestDto } from 'src/training/dto/training-register-request.dto';
 import { TrainingRegisterResponseDto } from 'src/training/dto/training-register-response.dto';
-import { Training } from 'src/entities/training/training.entity';
+import { TrainingResponseDto } from 'src/training/dto/training-response.dto';
+import { TrainingTypeResponseDto } from './dto/training-type-response.dto';
+import { TrainingService } from './training.service';
 
 @Controller('training')
 @ApiTags('Training')
@@ -17,7 +17,7 @@ export class TrainingController {
     type: TrainingRegisterRequestDto,
     description: 'Training register',
   })
-  @Post('register')
+  @Post('/register')
   async register(
     @Body() trainingRegisterRequestDto: TrainingRegisterRequestDto,
   ): Promise<TrainingRegisterResponseDto> {
@@ -48,7 +48,7 @@ export class TrainingController {
     description: 'Training list',
     isArray: true,
   })
-  @Get('/')
+  @Get('/all')
   async list(): Promise<TrainingResponseDto> {
     const trainingList = await this.trainingService.getAll();
     return new TrainingResponseDto('', 200, {

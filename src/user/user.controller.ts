@@ -35,7 +35,7 @@ export class UserController {
     const userRegisterResponseDto = new UserRegisterResponseDto(
       'User created',
       201,
-      { user: filterUserFields(user, []) },
+      { user: [filterUserFields(user, [])] },
     );
 
     return userRegisterResponseDto;
@@ -51,7 +51,7 @@ export class UserController {
     const user = await this.userService.getById(id);
 
     return new UserRegisterResponseDto('User found', 200, {
-      user: filterUserFields(user, []),
+      user: [filterUserFields(user, [])],
     });
   }
 
@@ -60,15 +60,14 @@ export class UserController {
     type: Array<UserRegisterResponseDto>,
     description: 'Users found',
   })
-  @Get('/')
+  @Get('/all')
   async getAll() {
     const userList = await this.userService.getAll();
+    const userListUpdated = userList.map((user) => filterUserFields(user, []));
 
-    return userList.map((user) => {
       return new UserRegisterResponseDto('Users found', 200, {
-        user: filterUserFields(user, []),
+        user: userListUpdated,
       });
-    });
   }
 
   @ApiResponse({

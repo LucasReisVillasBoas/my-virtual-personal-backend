@@ -45,7 +45,7 @@ export class UserResponseData {
 class UserResponseDto {
   @Expose()
   @ApiProperty()
-  user: UserResponseData;
+  user: UserResponseData[];
 }
 
 export class UserRegisterResponseDto extends BaseResponse<UserResponseDto> {}
