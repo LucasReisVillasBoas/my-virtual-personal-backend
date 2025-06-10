@@ -31,6 +31,11 @@ export class Professionals extends DeafultEntity {
   @Expose()
   @ApiProperty()
   @Property({ nullable: false })
+  email!: string;
+
+  @Expose()
+  @ApiProperty()
+  @Property({ nullable: false })
   @Enum(() => UserRole)
   type!: UserRole;
 

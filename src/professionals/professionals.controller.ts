@@ -1,9 +1,22 @@
-import { Body, Controller, Get, HttpStatus, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpStatus,
+  Param,
+  Post,
+  Put,
+  Query,
+} from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ProfessionalsService } from './professionals.service';
-import { UserRegisterRequestDto } from 'src/professionals/dto/user-register-request.dto';
-import { UserRegisterResponseDto } from 'src/professionals/dto/user-register-response.dto';
 import { ProfessionalData } from 'src/professionals/dto/professional-found-response.dto';
+import { UserRegisterRequestDto } from 'src/user/dto/user-register-request.dto';
+import { UserRegisterResponseDto } from 'src/user/dto/user-register-response.dto';
+import { UserResponseDto } from 'src/user/dto/user-response.dto';
+import { ProfessionalResponseDto } from 'src/professionals/dto/professional-response.dto';
+import { Professionals } from 'src/entities/professionals/professionals.entity';
 
 @Controller('professionals')
 @ApiTags('Professionals')
@@ -42,5 +55,53 @@ export class ProfessionalsController {
     response.statusCode = HttpStatus.OK;
     response.message = 'Professional found';
     return professional;
+  }
+
+  @ApiResponse({
+    status: 200,
+    type: Array<ProfessionalResponseDto>,
+    description: 'Users found',
+  })
+  @Get('/all')
+  async getAll() {
+    const professionalsList = await this.professionalsService.getAll();
+
+    return new ProfessionalResponseDto('Users found', 200, {
+      data: professionalsList,
+    });
+  }
+
+  @ApiResponse({
+    status: 200,
+    type: ProfessionalResponseDto,
+    description: 'User updated successfully',
+  })
+  @Put('/')
+  async update(
+    @Query('id') id: string,
+    @Body() professionalRequestDto: Partial<Professionals>,
+  ) {
+    const professionalUpdated = await this.professionalsService.update(
+      id,
+      professionalRequestDto,
+    );
+
+    return new ProfessionalResponseDto('User updated successfully', 200, {
+      data: professionalUpdated,
+    });
+  }
+
+  @ApiResponse({
+    status: 200,
+    type: UserResponseDto,
+    description: 'User deleted successfully',
+  })
+  @Delete('/:id')
+  async delete(@Param('id') id: string) {
+    const userUpdated = await this.professionalsService.delete(id);
+
+    return new UserResponseDto('User deleted successfully', 200, {
+      data: { userDeleted: userUpdated },
+    });
   }
 }

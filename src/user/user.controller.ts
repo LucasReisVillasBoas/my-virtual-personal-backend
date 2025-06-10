@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Param,
   Post,
   Put,
   Query,
@@ -12,7 +13,7 @@ import { UserService } from './user.service';
 import { UserRegisterRequestDto } from './dto/user-register-request.dto';
 import { UserRegisterResponseDto } from './dto/user-register-response.dto';
 import { filterUserFields } from '../utils/user.util';
-import { UserResponseDto } from 'src/user/dto/user-response-dto';
+import { UserResponseDto } from 'src/user/dto/user-response.dto';
 import { User } from 'src/entities/user/user.entity';
 
 @Controller('user')
@@ -34,7 +35,7 @@ export class UserController {
     const userRegisterResponseDto = new UserRegisterResponseDto(
       'User created',
       201,
-      { user: filterUserFields(user, []) },
+      { user: [filterUserFields(user, [])] },
     );
 
     return userRegisterResponseDto;
@@ -50,7 +51,7 @@ export class UserController {
     const user = await this.userService.getById(id);
 
     return new UserRegisterResponseDto('User found', 200, {
-      user: filterUserFields(user, []),
+      user: [filterUserFields(user, [])],
     });
   }
 
@@ -62,12 +63,11 @@ export class UserController {
   @Get('/all')
   async getAll() {
     const userList = await this.userService.getAll();
+    const userListUpdated = userList.map((user) => filterUserFields(user, []));
 
-    return userList.map((user) => {
       return new UserRegisterResponseDto('Users found', 200, {
-        user: filterUserFields(user, []),
+        user: userListUpdated,
       });
-    });
   }
 
   @ApiResponse({
@@ -95,12 +95,12 @@ export class UserController {
     type: UserResponseDto,
     description: 'User deleted successfully',
   })
-  @Delete('/')
-  async delete(@Query('id') id: string) {
-    const userUpdated = await this.userService.delete(id);
+  @Delete('/:id')
+  async delete(@Param('id') id: string) {
+    const userDeleted = await this.userService.delete(id);
 
     return new UserResponseDto('User deleted successfully', 200, {
-      data: { userDeleted: userUpdated },
+      data: { userDeleted: userDeleted },
     });
   }
 }
