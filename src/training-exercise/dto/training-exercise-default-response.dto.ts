@@ -36,4 +36,4 @@ export class TrainingExerciseResponse {
   data?: any;
 }
 
-export class TrainingExerciseResponseDto extends BaseResponse<TrainingExerciseResponse> {}
+export class TrainingExerciseDefaultResponseDto extends BaseResponse<TrainingExerciseResponse> {}

@@ -5,10 +5,12 @@ import { TrainingExerciseResponseData } from 'src/training-exercise/dto/training
 import { TrainingExerciseRegisterRequestDto } from 'src/training-exercise/dto/training-exercise-register-request.dto';
 import { TrainingService } from 'src/training/training.service';
 import { TrainingExerciseRepository } from './training-exercise.repository';
+import { InjectRepository } from '@mikro-orm/nestjs';
 
 @Injectable()
 export class TrainingExerciseService {
   constructor(
+    @InjectRepository(TrainingExercise)
     private readonly trainingExerciseRepository: TrainingExerciseRepository,
      @Inject(forwardRef(() => TrainingService))
         private readonly trainingService: TrainingService,

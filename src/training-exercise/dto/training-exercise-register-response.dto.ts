@@ -20,10 +20,10 @@ export class TrainingExerciseRegisterResponseData {
   description: string;
 }
 
-class TrainingExerciseRegisterResponseDto {
+class RegisterResponseDto {
   @Expose()
   @ApiProperty()
   data: any;
 }
 
-export class TrainingExerciseRegisterResponseDto2 extends BaseResponse<TrainingExerciseRegisterResponseDto> {}
+export class TrainingExerciseRegisterResponseDto extends BaseResponse<RegisterResponseDto> {}
