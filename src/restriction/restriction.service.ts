@@ -3,6 +3,7 @@ import { RestrictionRepository } from './restriction.repository';
 import { RestrictionRegisterRequestDto } from 'src/restriction/dto/restriction-register-request.dto';
 import { Restriction } from 'src/entities/restriction/restriction.entity';
 import { RestrictionResponseDto } from 'src/restriction/dto/restriction-response.dto';
+import { generateRestrictionCode } from 'src/utils/restriction.util';
 
 @Injectable()
 export class RestrictionService {
@@ -11,8 +12,11 @@ export class RestrictionService {
   async register(
     restrictionRegisterRequestDto: RestrictionRegisterRequestDto,
   ): Promise<Restriction> {
+    const existingRestriction = await this.restrictionRepository.findAll();
+    const code = generateRestrictionCode(restrictionRegisterRequestDto.code, existingRestriction);
+
     const restriction = this.restrictionRepository.create({
-      code: restrictionRegisterRequestDto.code,
+      code: code,
       description: restrictionRegisterRequestDto.description,
     });
 

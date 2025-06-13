@@ -24,7 +24,7 @@ export class Goals extends DeafultEntity {
 
   @Expose()
   @ApiProperty()
-  @Property({ nullable: false })
+  @Property({ nullable: false, unique: true })
   code: string;
 
   @Expose()
@@ -48,3 +48,15 @@ export class Goals extends DeafultEntity {
   @OneToMany(() => Training, (item) => item.goals)
   trainingList?: Training[];
 }
+
+// Traduction of Goals
+// Fat Loss (FL)
+// Hypertrophy (HYP)
+// Physical Conditioning (PC)
+// Physical Rehabilitation (REHAB)
+// Mental Wellness (MW)
+// Athletic Performance Training (APT)
+// Mobility & Flexibility (MOB)
+// Preventive Health Training (PHT)
+// Body Sculpting (BS)
+// Active Lifestyle (AL)

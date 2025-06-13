@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  Post,
   Put,
   Query,
 } from '@nestjs/common';
@@ -12,11 +13,31 @@ import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ExerciseResponseDto } from './dto/exercise-response.dto';
 import { Exercise } from 'src/entities/exercise/exercise.entity';
 import { ExerciseDefaultResponseDto } from 'src/exercise/dto/exercise-default-response.dto';
+import { ExerciseRegisterRequestDto } from 'src/exercise/dto/exercise-register-request.dto';
+import { ExerciseRegisterResponse } from 'src/exercise/dto/exercise-register-response.dto';
 
 @Controller('exercise')
 @ApiTags('Exercise')
 export class ExerciseController {
   constructor(private readonly exerciseService: ExerciseService) {}
+
+  @ApiResponse({
+    status: 201,
+    type: ExerciseRegisterRequestDto,
+    description: 'Exercise register',
+  })
+  @Post('register')
+  async register(
+    @Body() exerciseRegisterRequest: ExerciseRegisterRequestDto,
+  ): Promise<ExerciseRegisterResponse> {
+    const exercise = await this.exerciseService.register(
+      exerciseRegisterRequest,
+    );
+
+    return new ExerciseRegisterResponse('Exercise created', 201, {
+      data: exercise,
+    });
+  }
 
   @ApiResponse({
     status: 200,
