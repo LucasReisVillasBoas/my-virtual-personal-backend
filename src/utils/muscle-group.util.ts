@@ -24,3 +24,30 @@ export function mapMuscleGroup(muscleGroup: string): string {
       return 'muscle-group-not-found';
   }
 }
+
+export function mapMuscleGroupPrefix(muscleGroup: string): string {
+  switch (muscleGroup) {
+    case 'Peito':
+      return 'CH';
+    case 'Ombros':
+      return 'SH';
+    case 'Tríceps':
+      return 'TR';
+    case 'Bíceps':
+      return 'BI';
+    case 'Costas':
+      return 'BK';
+    case 'Quadríceps':
+      return 'QU';
+    case 'Posterior de Coxa':
+      return 'PO';
+    case 'Glúteos':
+      return 'GL';
+    case 'Panturrilha':
+      return 'CA';
+    case 'Abdômen':
+      return 'AB';
+    default:
+      return '';
+  }
+}

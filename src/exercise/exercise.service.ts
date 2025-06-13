@@ -23,11 +23,14 @@ export class ExerciseService {
       throw new BadRequestException('error-muscle-group-not_found');
     }
 
+    const muscleGroupExercises = await this.exerciseRepository.findAll();
+
     const code = generateCode(
-      muscleGroup.description,
+      muscleGroup.code,
       exerciseRegisterRequest.type,
-      exerciseRegisterRequest.description,
+      muscleGroupExercises,
     );
+
     const newExercise = this.exerciseRepository.create({
       code,
       description: exerciseRegisterRequest.description,

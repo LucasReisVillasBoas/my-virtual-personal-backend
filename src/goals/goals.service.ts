@@ -5,6 +5,8 @@ import { Goal } from 'src/goals/dto/goal-response.dto';
 import { GoalsResponseDto } from 'src/goals/dto/goals-response.dto';
 import { UserService } from 'src/user/user.service';
 import { GoalsRepository } from './goals.repository';
+import { generateGoalsCode } from 'src/utils/goals.util';
+import { GoalResponseData } from 'src/goals/dto/goal-register-response.dto';
 
 @Injectable()
 export class GoalsService {
@@ -16,15 +18,18 @@ export class GoalsService {
   async register(
     goalRegisterRequestDto: GoalRegisterRequestDto,
     userId: string,
-  ): Promise<Goals> {
+  ): Promise<GoalResponseData> {
     const user = await this.userService.getById(userId);
 
     if (!user) {
       throw new BadRequestException('error-user-not_found');
     }
 
+    const existingGoal = await this.goalsRepository.findAll();
+    const code = generateGoalsCode(goalRegisterRequestDto.code, existingGoal);
+
     const goals = this.goalsRepository.create({
-      code: goalRegisterRequestDto.code,
+      code: code,
       description: goalRegisterRequestDto.description,
       active: goalRegisterRequestDto.active,
       user: user,
@@ -41,9 +46,7 @@ export class GoalsService {
   }
 
   async getAll(): Promise<GoalsResponseDto[]> {
-    const goalsList = await this.goalsRepository.findAll({
-      exclude: ['createdAt', 'updatedAt'],
-    });
+    const goalsList = await this.goalsRepository.findAll();
 
     return goalsList;
   }

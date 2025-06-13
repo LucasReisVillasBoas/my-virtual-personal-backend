@@ -20,8 +20,8 @@ export class Restriction extends DeafultEntity {
 
   @Expose()
   @ApiProperty()
-  @Property({ nullable: false })
-  code: string;
+  @Property({ nullable: false, unique: true })
+  code: string; //FD - FOOD e P - PHYSICAL
 
   @Expose()
   @ApiProperty()
