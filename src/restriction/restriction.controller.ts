@@ -36,7 +36,7 @@ export class RestrictionController {
       restrictionRegisterRequestDto,
     );
 
-    return new RestrictionRegisterResponseDto('Goal created', 201, {
+    return new RestrictionRegisterResponseDto('Restriction created', 201, {
       data: restriction,
     });
   }
