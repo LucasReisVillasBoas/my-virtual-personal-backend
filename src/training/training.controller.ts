@@ -37,8 +37,8 @@ export class TrainingController {
     isArray: true,
   })
   @Get('/type')
-  async listType(): Promise<TrainingTypeResponseDto[]> {
-    const trainingListType = await this.trainingService.getAllByType();
+  async listType(@Query("type") type: string): Promise<TrainingTypeResponseDto[]> {
+    const trainingListType = await this.trainingService.getAllByType(type);
     return trainingListType;
   }
 

@@ -60,13 +60,13 @@ export class ProfessionalsController {
   @ApiResponse({
     status: 200,
     type: Array<ProfessionalResponseDto>,
-    description: 'Users found',
+    description: 'Professionals found',
   })
   @Get('/all')
   async getAll() {
     const professionalsList = await this.professionalsService.getAll();
 
-    return new ProfessionalResponseDto('Users found', 200, {
+    return new ProfessionalResponseDto('Professionals found', 200, {
       data: professionalsList,
     });
   }
@@ -74,7 +74,7 @@ export class ProfessionalsController {
   @ApiResponse({
     status: 200,
     type: ProfessionalResponseDto,
-    description: 'User updated successfully',
+    description: 'Professional updated successfully',
   })
   @Put('/')
   async update(
@@ -86,7 +86,7 @@ export class ProfessionalsController {
       professionalRequestDto,
     );
 
-    return new ProfessionalResponseDto('User updated successfully', 200, {
+    return new ProfessionalResponseDto('Professional updated successfully', 200, {
       data: professionalUpdated,
     });
   }
@@ -94,13 +94,13 @@ export class ProfessionalsController {
   @ApiResponse({
     status: 200,
     type: UserResponseDto,
-    description: 'User deleted successfully',
+    description: 'Professional deleted successfully',
   })
   @Delete('/:id')
   async delete(@Param('id') id: string) {
     const userUpdated = await this.professionalsService.delete(id);
 
-    return new UserResponseDto('User deleted successfully', 200, {
+    return new UserResponseDto('Professional deleted successfully', 200, {
       data: { userDeleted: userUpdated },
     });
   }

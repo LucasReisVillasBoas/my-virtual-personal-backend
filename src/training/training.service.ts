@@ -69,10 +69,8 @@ export class TrainingService {
     return training;
   }
 
-  async getAllByType(): Promise<TrainingTypeResponseDto[]> {
-    const trainingTypeList = await this.trainingTypeRepository.findAll({
-      exclude: ['createdAt', 'updatedAt'],
-    });
+  async getAllByType(typeId: string): Promise<TrainingTypeResponseDto[]> {
+    const trainingTypeList = await this.trainingTypeRepository.find({ code: typeId });
     return trainingTypeList;
   }
 

@@ -73,6 +73,14 @@ export class ProfessionalsService {
     if (!professional) {
       throw new BadRequestException('error-professional-not_found');
     }
+    const user = await this.userService.getByEmail(professional.email);
+    if (data.email) {
+      await this.userService.update(user.id, { email: data.email });
+    } else if (data.name) {
+      await this.userService.update(user.id, { fullName: data.name });
+    } else if (data.type) {
+      await this.userService.update(user.id, { role: data.type });
+    }
 
     Object.assign(professional, data);
     await this.professionalsRepository.flush();
@@ -97,14 +105,18 @@ export class ProfessionalsService {
   }
 
   async delete(id: string): Promise<boolean> {
-    const user = await this.professionalsRepository.findOne({ id });
+    const professional = await this.professionalsRepository.findOne({ id });
 
-    if (!user) {
+    if (!professional) {
       throw new BadRequestException('error-professional-not_found');
     }
 
-    const userDeleted = this.professionalsRepository.remove(user);
+    const user = await this.userService.getByEmail(professional.email);
+
+    const professionalDeleted =
+      this.professionalsRepository.remove(professional);
+    const userDeleted = this.userService.delete(user.id);
     await this.professionalsRepository.flush();
-    return userDeleted != null;
+    return professionalDeleted != null && userDeleted != null;
   }
 }

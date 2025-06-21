@@ -123,16 +123,6 @@ export class UserService {
       throw new BadRequestException('error-user-not_found');
     }
 
-    if (user.role === 'personal_trainer' || user.role === 'nutritionist') {
-      const professionalData: Partial<Professionals> = {
-        name: data.fullName,
-        email: data.email,
-      };
-      await this.professionalsService.updateByEmail(
-        data.email,
-        professionalData,
-      );
-    }
     Object.assign(user, data);
     await this.userRepository.flush();
 
