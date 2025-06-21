@@ -1,0 +1,540 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2024-06-11T00:00:00.000Z",
+  "__export_source": "github-copilot-insomnia",
+  "resources": [
+    {
+      "_id": "wrk_1",
+      "parentId": null,
+      "modified": 0,
+      "created": 0,
+      "name": "My Personal Backend API",
+      "description": "Coleção gerada automaticamente com todos os endpoints do projeto.",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "fld_auth",
+      "parentId": "wrk_1",
+      "name": "Auth",
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_auth_login",
+      "parentId": "fld_auth",
+      "name": "POST /auth/login",
+      "method": "POST",
+      "url": "{{ base_url }}/auth/login",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"\",\n  \"password\": \"\"\n}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "fld_exercise",
+      "parentId": "wrk_1",
+      "name": "Exercise",
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_exercise_register",
+      "parentId": "fld_exercise",
+      "name": "POST /exercise/register",
+      "method": "POST",
+      "url": "{{ base_url }}/exercise/register",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_exercise_all",
+      "parentId": "fld_exercise",
+      "name": "GET /exercise/all",
+      "method": "GET",
+      "url": "{{ base_url }}/exercise/all",
+      "_type": "request"
+    },
+    {
+      "_id": "req_exercise_details",
+      "parentId": "fld_exercise",
+      "name": "GET /exercise/?id=",
+      "method": "GET",
+      "url": "{{ base_url }}/exercise/?id=",
+      "_type": "request"
+    },
+    {
+      "_id": "req_exercise_code",
+      "parentId": "fld_exercise",
+      "name": "GET /exercise/code/:code",
+      "method": "GET",
+      "url": "{{ base_url }}/exercise/code/:code",
+      "_type": "request"
+    },
+    {
+      "_id": "req_exercise_update",
+      "parentId": "fld_exercise",
+      "name": "PUT /exercise/?id=",
+      "method": "PUT",
+      "url": "{{ base_url }}/exercise/?id=",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_exercise_delete",
+      "parentId": "fld_exercise",
+      "name": "DELETE /exercise/:id",
+      "method": "DELETE",
+      "url": "{{ base_url }}/exercise/:id",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_gender",
+      "parentId": "wrk_1",
+      "name": "Gender",
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_gender_all",
+      "parentId": "fld_gender",
+      "name": "GET /gender/all",
+      "method": "GET",
+      "url": "{{ base_url }}/gender/all",
+      "_type": "request"
+    },
+    {
+      "_id": "req_gender_details",
+      "parentId": "fld_gender",
+      "name": "GET /gender/?id=",
+      "method": "GET",
+      "url": "{{ base_url }}/gender/?id=",
+      "_type": "request"
+    },
+    {
+      "_id": "req_gender_update",
+      "parentId": "fld_gender",
+      "name": "PUT /gender/?id=",
+      "method": "PUT",
+      "url": "{{ base_url }}/gender/?id=",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_gender_delete",
+      "parentId": "fld_gender",
+      "name": "DELETE /gender/:id",
+      "method": "DELETE",
+      "url": "{{ base_url }}/gender/:id",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_goals",
+      "parentId": "wrk_1",
+      "name": "Goals",
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_goals_register",
+      "parentId": "fld_goals",
+      "name": "POST /goals/register",
+      "method": "POST",
+      "url": "{{ base_url }}/goals/register",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_goals_all",
+      "parentId": "fld_goals",
+      "name": "GET /goals/all",
+      "method": "GET",
+      "url": "{{ base_url }}/goals/all",
+      "_type": "request"
+    },
+    {
+      "_id": "req_goals_details",
+      "parentId": "fld_goals",
+      "name": "GET /goals/?id=",
+      "method": "GET",
+      "url": "{{ base_url }}/goals/?id=",
+      "_type": "request"
+    },
+    {
+      "_id": "req_goals_update",
+      "parentId": "fld_goals",
+      "name": "PUT /goals/?id=",
+      "method": "PUT",
+      "url": "{{ base_url }}/goals/?id=",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_goals_delete",
+      "parentId": "fld_goals",
+      "name": "DELETE /goals/:id",
+      "method": "DELETE",
+      "url": "{{ base_url }}/goals/:id",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_muscle_group",
+      "parentId": "wrk_1",
+      "name": "Muscle Group",
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_muscle_group_all",
+      "parentId": "fld_muscle_group",
+      "name": "GET /muscle-group/all",
+      "method": "GET",
+      "url": "{{ base_url }}/muscle-group/all",
+      "_type": "request"
+    },
+    {
+      "_id": "req_muscle_group_details",
+      "parentId": "fld_muscle_group",
+      "name": "GET /muscle-group/?id=",
+      "method": "GET",
+      "url": "{{ base_url }}/muscle-group/?id=",
+      "_type": "request"
+    },
+    {
+      "_id": "req_muscle_group_code",
+      "parentId": "fld_muscle_group",
+      "name": "GET /muscle-group/code/:code",
+      "method": "GET",
+      "url": "{{ base_url }}/muscle-group/code/:code",
+      "_type": "request"
+    },
+    {
+      "_id": "req_muscle_group_update",
+      "parentId": "fld_muscle_group",
+      "name": "PUT /muscle-group/?id=",
+      "method": "PUT",
+      "url": "{{ base_url }}/muscle-group/?id=",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_muscle_group_delete",
+      "parentId": "fld_muscle_group",
+      "name": "DELETE /muscle-group/:id",
+      "method": "DELETE",
+      "url": "{{ base_url }}/muscle-group/:id",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_professionals",
+      "parentId": "wrk_1",
+      "name": "Professionals",
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_professionals_register_user",
+      "parentId": "fld_professionals",
+      "name": "POST /professionals/register/user",
+      "method": "POST",
+      "url": "{{ base_url }}/professionals/register/user",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_professionals_get_by_id",
+      "parentId": "fld_professionals",
+      "name": "GET /professionals/?id=",
+      "method": "GET",
+      "url": "{{ base_url }}/professionals/?id=",
+      "_type": "request"
+    },
+    {
+      "_id": "req_professionals_all",
+      "parentId": "fld_professionals",
+      "name": "GET /professionals/all",
+      "method": "GET",
+      "url": "{{ base_url }}/professionals/all",
+      "_type": "request"
+    },
+    {
+      "_id": "req_professionals_update",
+      "parentId": "fld_professionals",
+      "name": "PUT /professionals/?id=",
+      "method": "PUT",
+      "url": "{{ base_url }}/professionals/?id=",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_professionals_delete",
+      "parentId": "fld_professionals",
+      "name": "DELETE /professionals/:id",
+      "method": "DELETE",
+      "url": "{{ base_url }}/professionals/:id",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_restriction",
+      "parentId": "wrk_1",
+      "name": "Restriction",
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_restriction_register",
+      "parentId": "fld_restriction",
+      "name": "POST /restriction/register",
+      "method": "POST",
+      "url": "{{ base_url }}/restriction/register",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_restriction_all",
+      "parentId": "fld_restriction",
+      "name": "GET /restriction/all",
+      "method": "GET",
+      "url": "{{ base_url }}/restriction/all",
+      "_type": "request"
+    },
+    {
+      "_id": "req_restriction_details",
+      "parentId": "fld_restriction",
+      "name": "GET /restriction/?id=",
+      "method": "GET",
+      "url": "{{ base_url }}/restriction/?id=",
+      "_type": "request"
+    },
+    {
+      "_id": "req_restriction_update",
+      "parentId": "fld_restriction",
+      "name": "PUT /restriction/?id=",
+      "method": "PUT",
+      "url": "{{ base_url }}/restriction/?id=",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_restriction_delete",
+      "parentId": "fld_restriction",
+      "name": "DELETE /restriction/:id",
+      "method": "DELETE",
+      "url": "{{ base_url }}/restriction/:id",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_training",
+      "parentId": "wrk_1",
+      "name": "Training",
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_training_register",
+      "parentId": "fld_training",
+      "name": "POST /training/register",
+      "method": "POST",
+      "url": "{{ base_url }}/training/register",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_training_type",
+      "parentId": "fld_training",
+      "name": "GET /training/type?type=",
+      "method": "GET",
+      "url": "{{ base_url }}/training/type?type=",
+      "_type": "request"
+    },
+    {
+      "_id": "req_training_all",
+      "parentId": "fld_training",
+      "name": "GET /training/all",
+      "method": "GET",
+      "url": "{{ base_url }}/training/all",
+      "_type": "request"
+    },
+    {
+      "_id": "req_training_details",
+      "parentId": "fld_training",
+      "name": "GET /training/?id=",
+      "method": "GET",
+      "url": "{{ base_url }}/training/?id=",
+      "_type": "request"
+    },
+    {
+      "_id": "req_training_update",
+      "parentId": "fld_training",
+      "name": "PUT /training/?id=",
+      "method": "PUT",
+      "url": "{{ base_url }}/training/?id=",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_training_delete",
+      "parentId": "fld_training",
+      "name": "DELETE /training/:id",
+      "method": "DELETE",
+      "url": "{{ base_url }}/training/:id",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_training_exercise",
+      "parentId": "wrk_1",
+      "name": "Training Exercise",
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_training_exercise_register",
+      "parentId": "fld_training_exercise",
+      "name": "POST /training-exercise/register",
+      "method": "POST",
+      "url": "{{ base_url }}/training-exercise/register",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_training_exercise_all",
+      "parentId": "fld_training_exercise",
+      "name": "GET /training-exercise/all",
+      "method": "GET",
+      "url": "{{ base_url }}/training-exercise/all",
+      "_type": "request"
+    },
+    {
+      "_id": "req_training_exercise_details",
+      "parentId": "fld_training_exercise",
+      "name": "GET /training-exercise/?id=",
+      "method": "GET",
+      "url": "{{ base_url }}/training-exercise/?id=",
+      "_type": "request"
+    },
+    {
+      "_id": "req_training_exercise_update",
+      "parentId": "fld_training_exercise",
+      "name": "PUT /training-exercise/?id=",
+      "method": "PUT",
+      "url": "{{ base_url }}/training-exercise/?id=",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_training_exercise_delete",
+      "parentId": "fld_training_exercise",
+      "name": "DELETE /training-exercise/:id",
+      "method": "DELETE",
+      "url": "{{ base_url }}/training-exercise/:id",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_user",
+      "parentId": "wrk_1",
+      "name": "User",
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_user_register",
+      "parentId": "fld_user",
+      "name": "POST /user/register",
+      "method": "POST",
+      "url": "{{ base_url }}/user/register",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_user_details",
+      "parentId": "fld_user",
+      "name": "GET /user/?id=",
+      "method": "GET",
+      "url": "{{ base_url }}/user/?id=",
+      "_type": "request"
+    },
+    {
+      "_id": "req_user_all",
+      "parentId": "fld_user",
+      "name": "GET /user/all",
+      "method": "GET",
+      "url": "{{ base_url }}/user/all",
+      "_type": "request"
+    },
+    {
+      "_id": "req_user_update",
+      "parentId": "fld_user",
+      "name": "PUT /user/?id=",
+      "method": "PUT",
+      "url": "{{ base_url }}/user/?id=",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_user_delete",
+      "parentId": "fld_user",
+      "name": "DELETE /user/:id",
+      "method": "DELETE",
+      "url": "{{ base_url }}/user/:id",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_gemini",
+      "parentId": "wrk_1",
+      "name": "Gemini",
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_gemini_ask",
+      "parentId": "fld_gemini",
+      "name": "POST /gemini/ask",
+      "method": "POST",
+      "url": "{{ base_url }}/gemini/ask",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"prompt\": \"\"\n}"
+      },
+      "_type": "request"
+    }
+  ]
+}

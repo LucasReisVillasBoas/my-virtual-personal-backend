@@ -82,4 +82,34 @@ export class ExerciseService {
     await this.exerciseRepository.flush();
     return exerciseDeleted != null;
   }
+
+  async addCustomExerciseForUser(
+    exerciseRegisterRequest: ExerciseRegisterRequestDto,
+    userId: string,
+  ): Promise<Exercise> {
+    const muscleGroup = await this.muscleGroupService.getByCode(
+      exerciseRegisterRequest.muscleGroupCode,
+    );
+    if (!muscleGroup) {
+      throw new BadRequestException('error-muscle-group-not_found');
+    }
+
+    const muscleGroupExercises = await this.exerciseRepository.findAll();
+
+    const code = generateCode(
+      muscleGroup.code,
+      exerciseRegisterRequest.type,
+      muscleGroupExercises,
+    );
+
+    const newExercise = this.exerciseRepository.create({
+      code,
+      description: exerciseRegisterRequest.description,
+      muscleGroup: muscleGroup,
+      user: userId,
+    });
+
+    await this.exerciseRepository.flush();
+    return newExercise;
+  }
 }
