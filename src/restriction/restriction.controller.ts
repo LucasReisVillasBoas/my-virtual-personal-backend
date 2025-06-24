@@ -37,19 +37,19 @@ export class RestrictionController {
     );
 
     return new RestrictionRegisterResponseDto('Restriction created', 201, {
-      data: restriction,
+      restriction: restriction,
     });
   }
 
   @ApiResponse({
     status: 200,
-    type: RestrictionResponseDto,
+    type: RestrictionDefaultResponseDto,
     description: 'Restrictions list',
   })
   @Get('/all')
-  async list(): Promise<RestrictionResponseDto[]> {
+  async list(): Promise<RestrictionDefaultResponseDto> {
     const restrictions = await this.restrictionService.getAll();
-    return restrictions;
+    return new RestrictionDefaultResponseDto('Restriction list retrieved', 200, {restrictions: restrictions});
   }
 
   @ApiResponse({
@@ -64,7 +64,7 @@ export class RestrictionController {
     const restriction = await this.restrictionService.getById(id);
 
     return new RestrictionDefaultResponseDto('Restriction retrieved', 200, {
-      data: restriction,
+      restriction: restriction,
     });
   }
 
@@ -86,7 +86,7 @@ export class RestrictionController {
       'Restriction updated successfully',
       200,
       {
-        data: restriction,
+        restriction: restriction,
       },
     );
   }
@@ -105,7 +105,7 @@ export class RestrictionController {
       'Restriction deleted successfully',
       200,
       {
-        data: restrictionDeleted,
+        restrictionDeleted: restrictionDeleted,
       },
     );
   }

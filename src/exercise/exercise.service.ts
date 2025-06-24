@@ -46,12 +46,12 @@ export class ExerciseService {
     return exerciseList;
   }
 
-  async getById(id: string): Promise<ExerciseResponseDto> {
+  async getById(id: string): Promise<Exercise> {
     const exercise = await this.exerciseRepository.findOne({ id });
     return exercise;
   }
 
-  async getByCode(code: string): Promise<ExerciseResponseDto> {
+  async getByCode(code: string): Promise<Exercise> {
     const exercise = await this.exerciseRepository.findOne({ code });
     return exercise;
   }

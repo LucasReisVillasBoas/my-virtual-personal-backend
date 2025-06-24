@@ -3,7 +3,6 @@ import {
   Controller,
   Delete,
   Get,
-  HttpStatus,
   Param,
   Post,
   Put,
@@ -13,7 +12,6 @@ import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ProfessionalsService } from './professionals.service';
 import { ProfessionalData } from 'src/professionals/dto/professional-found-response.dto';
 import { UserRegisterRequestDto } from 'src/user/dto/user-register-request.dto';
-import { UserRegisterResponseDto } from 'src/user/dto/user-register-response.dto';
 import { UserResponseDto } from 'src/user/dto/user-response.dto';
 import { ProfessionalResponseDto } from 'src/professionals/dto/professional-response.dto';
 import { Professionals } from 'src/entities/professionals/professionals.entity';
@@ -23,22 +21,21 @@ import { Professionals } from 'src/entities/professionals/professionals.entity';
 export class ProfessionalsController {
   constructor(private readonly professionalsService: ProfessionalsService) {}
   @ApiResponse({
-    status: 200,
-    type: UserRegisterRequestDto,
+    status: 201,
+    type: ProfessionalResponseDto,
     description: 'User registered into Professional',
   })
   @Post('register/user')
   async register(
     @Body() userRegisterRequestDto: UserRegisterRequestDto,
     @Query('id') id: string,
-  ): Promise<UserRegisterResponseDto> {
-    await this.professionalsService.addUser(userRegisterRequestDto, id);
-    const userRegisterResponseDto = new UserRegisterResponseDto();
+  ): Promise<ProfessionalResponseDto> {
+    const response = await this.professionalsService.addUser(
+      userRegisterRequestDto,
+      id,
+    );
 
-    userRegisterResponseDto.message = 'User added to Professional';
-    userRegisterResponseDto.statusCode = HttpStatus.CREATED;
-
-    return userRegisterResponseDto;
+    return new ProfessionalResponseDto('User added to Professional', 201, {professional: response});
   }
 
   @ApiResponse({
@@ -50,11 +47,7 @@ export class ProfessionalsController {
   async getById(@Query('id') id: string) {
     const professional = await this.professionalsService.getById(id);
 
-    const response = new ProfessionalData();
-    response.data = { professional: professional };
-    response.statusCode = HttpStatus.OK;
-    response.message = 'Professional found';
-    return professional;
+    return new ProfessionalResponseDto('Professional found', 200, {professional: professional});
   }
 
   @ApiResponse({
@@ -66,9 +59,7 @@ export class ProfessionalsController {
   async getAll() {
     const professionalsList = await this.professionalsService.getAll();
 
-    return new ProfessionalResponseDto('Professionals found', 200, {
-      data: professionalsList,
-    });
+    return new ProfessionalResponseDto('Professionals found', 200, {professionals: professionalsList});
   }
 
   @ApiResponse({
@@ -86,22 +77,22 @@ export class ProfessionalsController {
       professionalRequestDto,
     );
 
-    return new ProfessionalResponseDto('Professional updated successfully', 200, {
-      data: professionalUpdated,
-    });
+    return new ProfessionalResponseDto(
+      'Professional updated successfully',
+      200,
+      {professional: professionalUpdated}
+    );
   }
 
   @ApiResponse({
     status: 200,
-    type: UserResponseDto,
+    type: ProfessionalResponseDto,
     description: 'Professional deleted successfully',
   })
   @Delete('/:id')
-  async delete(@Param('id') id: string) {
-    const userUpdated = await this.professionalsService.delete(id);
+  async delete(@Param('id') id: string): Promise<ProfessionalResponseDto> {
+    const userDeleted = await this.professionalsService.delete(id);
 
-    return new UserResponseDto('Professional deleted successfully', 200, {
-      data: { userDeleted: userUpdated },
-    });
+    return new ProfessionalResponseDto('Professional deleted successfully', 200, {professionalDeleted: userDeleted});
   }
 }

@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Put, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Put,
+  Query,
+} from '@nestjs/common';
 import { GenderService } from './gender.service';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { GenderResponseDto } from './dto/gender-response.dto';
@@ -17,9 +25,13 @@ export class GenderController {
     isArray: true,
   })
   @Get('/all')
-  async list(): Promise<GenderResponseDto[]> {
+  async list(): Promise<GenderDefaultResponseDto> {
     const genderList = await this.genderService.getAll();
-    return genderList;
+    return new GenderDefaultResponseDto(
+      'Gender list retrieved successfully',
+      200,
+      { genders: genderList },
+    );
   }
 
   @ApiResponse({
@@ -28,9 +40,13 @@ export class GenderController {
     description: 'Gender details',
   })
   @Get('/')
-  async getById(@Query('id') id: string): Promise<GenderResponseDto> {
+  async getById(@Query('id') id: string): Promise<GenderDefaultResponseDto> {
     const gender = await this.genderService.getById(id);
-    return gender;
+    return new GenderDefaultResponseDto(
+      'Gender details retrieved successfully',
+      200,
+      { gender: gender },
+    );
   }
 
   @ApiResponse({
@@ -45,7 +61,7 @@ export class GenderController {
   ): Promise<GenderDefaultResponseDto> {
     const gender = await this.genderService.update(id, genderRequestDto);
     return new GenderDefaultResponseDto('Gender updated successfully', 200, {
-      data: gender,
+      gender: gender,
     });
   }
 
@@ -58,7 +74,7 @@ export class GenderController {
   async delete(@Param('id') id: string): Promise<GenderDefaultResponseDto> {
     const gender = await this.genderService.delete(id);
     return new GenderDefaultResponseDto('Gender deleted successfully', 200, {
-      data: gender,
+      genderDeleted: gender,
     });
   }
 }

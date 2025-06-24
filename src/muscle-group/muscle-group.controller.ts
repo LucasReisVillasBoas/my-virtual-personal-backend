@@ -12,36 +12,36 @@ export class MuscleGroupController {
 
   @ApiResponse({
     status: 200,
-    type: MuscleGroupResponseDto,
+    type: MuscleGroupDefaultResponseDto,
     description: 'Muscle Group list',
     isArray: true,
   })
   @Get('/all')
-  async list(): Promise<MuscleGroupResponseDto[]> {
+  async list(): Promise<MuscleGroupDefaultResponseDto> {
     const muscleGroupList = await this.muscleGroupService.getAll();
-    return muscleGroupList;
+    return new MuscleGroupDefaultResponseDto('Muscle Group list retrieved successfully', 200, { muscleGroups: muscleGroupList });
   }
 
   @ApiResponse({
     status: 200,
-    type: MuscleGroupResponseDto,
+    type: MuscleGroupDefaultResponseDto,
     description: 'Muscle Group details'
   })
   @Get()
-  async getById(@Query('id') id: string): Promise<MuscleGroupResponseDto> {
+  async getById(@Query('id') id: string): Promise<MuscleGroupDefaultResponseDto> {
     const muscleGroup = await this.muscleGroupService.getById(id);
-    return muscleGroup;
+    return new MuscleGroupDefaultResponseDto('Muscle Group details retrieved successfully', 200, { muscleGroup: muscleGroup });
   }
 
   @ApiResponse({
     status: 200,
-    type: MuscleGroupResponseDto,
+    type: MuscleGroupDefaultResponseDto,
     description: 'Muscle Group details by code'
   })
   @Get('/code/:code')
-  async getByCode(@Param('code') code: string): Promise<MuscleGroupResponseDto> {
+  async getByCode(@Param('code') code: string): Promise<MuscleGroupDefaultResponseDto> {
     const muscleGroup = await this.muscleGroupService.getByCode(code);
-    return muscleGroup;
+    return new MuscleGroupDefaultResponseDto('Muscle Group details retrieved successfully', 200, { muscleGroup: muscleGroup });
   }
 
   @ApiResponse({
@@ -56,7 +56,7 @@ export class MuscleGroupController {
     ): Promise<MuscleGroupDefaultResponseDto> {
       const muscleGroup = await this.muscleGroupService.update(id, muscleGroupRequestDto);
       return new MuscleGroupDefaultResponseDto('Muscle Group updated successfully', 200, {
-        data: muscleGroup,
+        muscleGroup: muscleGroup,
       });
     }
   
@@ -69,7 +69,7 @@ export class MuscleGroupController {
     async delete(@Param('id') id: string): Promise<MuscleGroupDefaultResponseDto> {
       const muscleGroup = await this.muscleGroupService.delete(id);
       return new MuscleGroupDefaultResponseDto('Muscle Group deleted successfully', 200, {
-        data: muscleGroup,
+        muscleGroupDeleted: muscleGroup,
       });
     }
 }

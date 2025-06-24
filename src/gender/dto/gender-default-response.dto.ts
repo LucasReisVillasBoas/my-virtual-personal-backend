@@ -5,7 +5,15 @@ import { BaseResponse } from 'src/dto/base-response.dto';
 class GenderDefaultResponse {
   @Expose()
   @ApiProperty()
-  data?: any;
+  gender?: any;
+
+  @Expose()
+  @ApiProperty()
+  genders?: any;
+
+  @Expose()
+  @ApiProperty()
+  genderDeleted?: boolean;
 }
 
 export class GenderDefaultResponseDto extends BaseResponse<GenderDefaultResponse> {}

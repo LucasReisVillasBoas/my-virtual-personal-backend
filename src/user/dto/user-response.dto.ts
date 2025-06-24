@@ -5,7 +5,7 @@ import { BaseResponse } from 'src/dto/base-response.dto';
 class UserResponse {
   @Expose()
   @ApiProperty()
-  data?: any;
+  user?: any;
 }
 
 export class UserResponseDto extends BaseResponse<UserResponse> {}

@@ -19,7 +19,15 @@ export class Goal {
 class GoalsResponse {
   @Expose()
   @ApiProperty()
-  data?: any;
+  goal?: any;
+
+  @Expose()
+  @ApiProperty()
+  goals?: any;
+
+  @Expose()
+  @ApiProperty()
+  goalDeleted?: boolean;
 }
 
 export class GoalResponseDto extends BaseResponse<GoalsResponse> {}
