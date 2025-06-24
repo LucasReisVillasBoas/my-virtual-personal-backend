@@ -19,7 +19,15 @@ export class RestrictionResponseData {
 class RestrictionResponse {
   @Expose()
   @ApiProperty()
-  data?: any;
+  restriction?: any;
+
+  @Expose()
+  @ApiProperty()
+  restrictions?: any;
+
+  @Expose()
+  @ApiProperty()
+  restrictionDeleted?: any;
 }
 
 export class RestrictionDefaultResponseDto extends BaseResponse<RestrictionResponse> {}

@@ -11,6 +11,7 @@ import { UserService } from '../user/user.service';
 import { ProfessionalsRepository } from './professionals.repository';
 import { InjectRepository } from '@mikro-orm/nestjs';
 import { UserRegisterRequestDto } from 'src/user/dto/user-register-request.dto';
+import { AddUserToProfessionalResponseDto } from 'src/professionals/dto/add-user-to-professional-response.dto';
 
 @Injectable()
 export class ProfessionalsService {
@@ -45,7 +46,7 @@ export class ProfessionalsService {
   async addUser(
     userRequestDto: UserRegisterRequestDto,
     professionalId: string,
-  ): Promise<void> {
+  ): Promise<AddUserToProfessionalResponseDto> {
     const professional = await this.getById(professionalId);
     if (!professional) {
       throw new BadRequestException('error-professional-not_found');
@@ -58,9 +59,17 @@ export class ProfessionalsService {
       const user = await this.userService.getByEmail(userRequestDto.email);
       professional.users.add(user);
       await this.professionalsRepository.flush();
+      return {
+        professional_id: professional.id,
+        user_id: user.id,
+      };
     } else {
       userRequestDto.professionals_id = [professionalId];
-      await this.userService.register(userRequestDto);
+      const newUser = await this.userService.register(userRequestDto);
+      return {
+        professional_id: professional.id,
+        user_id: newUser.id,
+      };
     }
   }
 

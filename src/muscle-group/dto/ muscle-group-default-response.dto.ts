@@ -5,7 +5,15 @@ import { BaseResponse } from 'src/dto/base-response.dto';
 class MuscleGroupDefaultResponse {
   @Expose()
   @ApiProperty()
-  data?: any;
+  muscleGroup?: any;
+
+  @Expose()
+  @ApiProperty()
+  muscleGroups?: any;
+
+  @Expose()
+  @ApiProperty()
+  muscleGroupDeleted?: boolean;
 }
 
 export class MuscleGroupDefaultResponseDto extends BaseResponse<MuscleGroupDefaultResponse> {}

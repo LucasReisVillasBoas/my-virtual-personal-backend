@@ -86,7 +86,7 @@ export class UserController {
     );
 
     return new UserResponseDto('User updated successfully', 200, {
-      data: filterUserFields(userUpdated, []),
+      user: filterUserFields(userUpdated, []),
     });
   }
 
@@ -100,7 +100,7 @@ export class UserController {
     const userDeleted = await this.userService.delete(id);
 
     return new UserResponseDto('User deleted successfully', 200, {
-      data: { userDeleted: userDeleted },
+      user: userDeleted,
     });
   }
 }

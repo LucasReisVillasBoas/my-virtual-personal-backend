@@ -23,7 +23,7 @@ export class TrainingResponseData {
 class TrainingResponseDto {
   @Expose()
   @ApiProperty()
-  data: any;
+  training: any;
 }
 
 export class TrainingRegisterResponseDto extends BaseResponse<TrainingResponseDto> {}

@@ -42,7 +42,7 @@ export class TrainingExerciseController {
     return new TrainingExerciseRegisterResponseDto(
       'Training exercise created',
       201,
-      { data: response },
+      { trainingExercise: response },
     );
   }
 
@@ -57,7 +57,7 @@ export class TrainingExerciseController {
     return new TrainingExerciseDefaultResponseDto(
       'Training exercise found',
       200,
-      { data: trainingExercises },
+      { trainingExercises: trainingExercises },
     );
   }
 
@@ -76,7 +76,7 @@ export class TrainingExerciseController {
       'Training exercise found',
       200,
       {
-        data: trainingExercise,
+        trainingExercise: trainingExercise,
       },
     );
   }
@@ -98,7 +98,7 @@ export class TrainingExerciseController {
     return new TrainingExerciseDefaultResponseDto(
       'Training exercise updated successfully',
       200,
-      { data: trainingExercise },
+      { trainingExercise: trainingExercise },
     );
   }
 
@@ -116,7 +116,7 @@ export class TrainingExerciseController {
     return new TrainingExerciseDefaultResponseDto(
       'Training exercise deleted successfully',
       200,
-      { data: true },
+      { trainingExerciseDeleted: true },
     );
   }
 }

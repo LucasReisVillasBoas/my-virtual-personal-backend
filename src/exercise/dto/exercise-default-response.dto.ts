@@ -5,7 +5,15 @@ import { BaseResponse } from 'src/dto/base-response.dto';
 class ExerciseDefaultResponse {
   @Expose()
   @ApiProperty()
-  data?: any;
+  exercise?: any;
+
+  @Expose()
+  @ApiProperty()
+  exercises?: any;
+
+  @Expose()
+  @ApiProperty()
+  exerciseDeleted?: boolean;
 }
 
 export class ExerciseDefaultResponseDto extends BaseResponse<ExerciseDefaultResponse> {}

@@ -33,7 +33,15 @@ export class TrainingExerciseResponseData {
 export class TrainingExerciseResponse {
   @Expose()
   @ApiProperty()
-  data?: any;
+  trainingExercise?: any;
+
+  @Expose()
+  @ApiProperty()
+  trainingExercises?: any;
+
+  @Expose()
+  @ApiProperty()
+  trainingExerciseDeleted?: any;
 }
 
 export class TrainingExerciseDefaultResponseDto extends BaseResponse<TrainingExerciseResponse> {}

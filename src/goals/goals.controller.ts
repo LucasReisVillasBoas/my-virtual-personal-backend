@@ -45,9 +45,9 @@ export class GoalsController {
     description: 'Goals list',
   })
   @Get('/all')
-  async list(): Promise<GoalsResponseDto[]> {
+  async list(): Promise<GoalResponseDto> {
     const goals = await this.goalsService.getAll();
-    return goals;
+    return new GoalResponseDto('Goals list retrieved successfully', 200, {goals: goals});
   }
 
   @ApiResponse({
@@ -57,10 +57,10 @@ export class GoalsController {
   })
   @Get('/')
   async getById(@Query('id') goalId: string): Promise<GoalResponseDto> {
-    const goals = await this.goalsService.getById(goalId);
+    const goal = await this.goalsService.getById(goalId);
 
     return new GoalResponseDto('Goals retrieved', 200, {
-      data: goals,
+      goal: goal,
     });
   }
 
@@ -76,7 +76,7 @@ export class GoalsController {
   ): Promise<GoalResponseDto> {
     const goals = await this.goalsService.update(id, goalsRequestDto);
     return new GoalResponseDto('Goals updated successfully', 200, {
-      data: goals,
+      goal: goals,
     });
   }
 
@@ -89,7 +89,7 @@ export class GoalsController {
   async delete(@Param('id') id: string): Promise<GoalResponseDto> {
     const goalsDeleted = await this.goalsService.delete(id);
     return new GoalResponseDto('Goals deleted successfully', 200, {
-      data: goalsDeleted,
+      goalDeleted: goalsDeleted,
     });
   }
 }

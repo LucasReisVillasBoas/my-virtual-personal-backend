@@ -35,7 +35,7 @@ export class ExerciseController {
     );
 
     return new ExerciseRegisterResponse('Exercise created', 201, {
-      data: exercise,
+      exercise: exercise,
     });
   }
 
@@ -46,9 +46,15 @@ export class ExerciseController {
     isArray: true,
   })
   @Get('/all')
-  async list(): Promise<ExerciseResponseDto[]> {
+  async list(): Promise<ExerciseDefaultResponseDto> {
     const exerciseList = await this.exerciseService.getAll();
-    return exerciseList;
+    return new ExerciseDefaultResponseDto(
+      'Exercise list retrieved successfully',
+      200,
+      {
+        exercises: exerciseList,
+      },
+    );
   }
 
   @ApiResponse({
@@ -57,9 +63,15 @@ export class ExerciseController {
     description: 'Exercise details',
   })
   @Get('/')
-  async details(@Query('id') id: string): Promise<ExerciseResponseDto> {
+  async details(@Query('id') id: string): Promise<ExerciseDefaultResponseDto> {
     const exercise = await this.exerciseService.getById(id);
-    return exercise;
+    return new ExerciseDefaultResponseDto(
+      'Exercise details retrieved successfully by id',
+      200,
+      {
+        exercise: exercise,
+      },
+    );
   }
 
   @ApiResponse({
@@ -70,9 +82,15 @@ export class ExerciseController {
   @Get('/code/:code')
   async detailsByCode(
     @Param('code') code: string,
-  ): Promise<ExerciseResponseDto> {
+  ): Promise<ExerciseDefaultResponseDto> {
     const exercise = await this.exerciseService.getByCode(code);
-    return exercise;
+    return new ExerciseDefaultResponseDto(
+      'Exercise details retrieved successfully by code',
+      200,
+      {
+        exercise: exercise,
+      },
+    );
   }
 
   @ApiResponse({
@@ -94,7 +112,7 @@ export class ExerciseController {
       'Exercise updated successfully',
       200,
       {
-        data: exerciseUpdated,
+        exercise: exerciseUpdated,
       },
     );
   }
@@ -112,7 +130,7 @@ export class ExerciseController {
       'Exercise deleted successfully',
       200,
       {
-        data: { exerciseDeleted: exerciseDeleted },
+        exerciseDeleted: exerciseDeleted,
       },
     );
   }
