@@ -9,13 +9,12 @@ import {
   Query,
 } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Training } from 'src/entities/training/training.entity';
-import { TrainingRegisterRequestDto } from 'src/training/dto/training-register-request.dto';
-import { TrainingRegisterResponseDto } from 'src/training/dto/training-register-response.dto';
-import { TrainingResponseDto } from 'src/training/dto/training-response.dto';
-import { TrainingTypeResponseDto } from './dto/training-type-response.dto';
+import { Training } from '../entities/training/training.entity';
+import { TrainingRegisterRequestDto } from '../training/dto/training-register-request.dto';
+import { TrainingRegisterResponseDto } from '../training/dto/training-register-response.dto';
+import { TrainingResponseDto } from '../training/dto/training-response.dto';
 import { TrainingService } from './training.service';
-import { filterTrainingFields } from 'src/utils/training.util';
+import { filterTrainingFields } from '../utils/training.util';
 
 @Controller('training')
 @ApiTags('Training')

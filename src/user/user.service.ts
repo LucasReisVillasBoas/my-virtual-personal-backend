@@ -5,7 +5,7 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { UserRepository } from './user.repository';
-import { User } from 'src/entities/user/user.entity';
+import { User } from '../entities/user/user.entity';
 import { UserExistsResponseDto } from './dto/user-exists-response.dto';
 import { UserExistsRequestDto } from './dto/user-exists-request.dto';
 import { UserRegisterRequestDto } from './dto/user-register-request.dto';
@@ -15,11 +15,10 @@ import {
   validateHeight,
   validateWeight,
 } from '../utils/validation-user.util';
-import { mapUserRole } from 'src/utils/user.util';
-import { ProfessionalsService } from 'src/professionals/professionals.service';
+import { mapUserRole } from '../utils/user.util';
+import { ProfessionalsService } from '../professionals/professionals.service';
 import * as bcrypt from 'bcryptjs';
 import { validatePassword } from '../utils/auth.util';
-import { Professionals } from 'src/entities/professionals/professionals.entity';
 
 @Injectable()
 export class UserService {

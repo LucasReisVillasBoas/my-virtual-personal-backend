@@ -1,12 +1,12 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { Goals } from 'src/entities/goals/goals.entity';
-import { GoalRegisterRequestDto } from 'src/goals/dto/goal-register-request.dto';
-import { Goal } from 'src/goals/dto/goal-response.dto';
-import { GoalsResponseDto } from 'src/goals/dto/goals-response.dto';
-import { UserService } from 'src/user/user.service';
+import { Goals } from '../entities/goals/goals.entity';
+import { GoalRegisterRequestDto } from './dto/goal-register-request.dto';
+import { Goal } from './dto/goal-response.dto';
+import { GoalsResponseDto } from './dto/goals-response.dto';
+import { UserService } from '../user/user.service';
 import { GoalsRepository } from './goals.repository';
-import { generateGoalsCode } from 'src/utils/goals.util';
-import { GoalResponseData } from 'src/goals/dto/goal-register-response.dto';
+import { generateGoalsCode } from '../utils/goals.util';
+import { GoalResponseData } from './dto/goal-register-response.dto';
 
 @Injectable()
 export class GoalsService {

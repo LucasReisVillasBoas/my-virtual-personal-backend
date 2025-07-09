@@ -1,9 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Expose } from 'class-transformer';
-import { IsOptional } from 'class-validator';
-import { BaseResponse } from 'src/dto/base-response.dto';
-import { TrainingExercise } from 'src/entities/training-exercise/training-exercise.entity';
-import { TrainingType } from 'src/entities/training/training-type.entity';
+import { BaseResponse } from '../../dto/base-response.dto';
 
 export class TrainingResponseData {
   @Expose()

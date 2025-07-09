@@ -13,8 +13,8 @@ import { UserService } from './user.service';
 import { UserRegisterRequestDto } from './dto/user-register-request.dto';
 import { UserRegisterResponseDto } from './dto/user-register-response.dto';
 import { filterUserFields } from '../utils/user.util';
-import { UserResponseDto } from 'src/user/dto/user-response.dto';
-import { User } from 'src/entities/user/user.entity';
+import { UserResponseDto } from './dto/user-response.dto';
+import { User } from '../entities/user/user.entity';
 
 @Controller('user')
 @ApiTags('User')

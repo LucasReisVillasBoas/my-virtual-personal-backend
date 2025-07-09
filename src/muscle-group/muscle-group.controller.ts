@@ -1,9 +1,8 @@
 import { Body, Controller, Delete, Get, Param, Put, Query } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { MuscleGroupService } from './muscle-group.service';
-import { MuscleGroupResponseDto } from './dto/muscle-group-response.dto';
-import { MuscleGroupDefaultResponseDto } from 'src/muscle-group/dto/ muscle-group-default-response.dto';
-import { MuscleGroup } from 'src/entities/muscle-group/muscle-group.entity';
+import { MuscleGroupDefaultResponseDto } from './dto/ muscle-group-default-response.dto';
+import { MuscleGroup } from '../entities/muscle-group/muscle-group.entity';
 
 @Controller('muscle-group')
 @ApiTags('Muscle Group')

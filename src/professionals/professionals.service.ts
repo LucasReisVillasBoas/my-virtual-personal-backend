@@ -5,13 +5,13 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { Professionals } from '../entities/professionals/professionals.entity';
-import { User } from 'src/entities/user/user.entity';
-import { UserExistsRequestDto } from 'src/user/dto/user-exists-request.dto';
+import { User } from '../entities/user/user.entity';
+import { UserExistsRequestDto } from '../user/dto/user-exists-request.dto';
 import { UserService } from '../user/user.service';
 import { ProfessionalsRepository } from './professionals.repository';
 import { InjectRepository } from '@mikro-orm/nestjs';
-import { UserRegisterRequestDto } from 'src/user/dto/user-register-request.dto';
-import { AddUserToProfessionalResponseDto } from 'src/professionals/dto/add-user-to-professional-response.dto';
+import { UserRegisterRequestDto } from '../user/dto/user-register-request.dto';
+import { AddUserToProfessionalResponseDto } from '../professionals/dto/add-user-to-professional-response.dto';
 
 @Injectable()
 export class ProfessionalsService {
@@ -83,6 +83,7 @@ export class ProfessionalsService {
       throw new BadRequestException('error-professional-not_found');
     }
     const user = await this.userService.getByEmail(professional.email);
+    // revisar
     if (data.email) {
       await this.userService.update(user.id, { email: data.email });
     } else if (data.name) {

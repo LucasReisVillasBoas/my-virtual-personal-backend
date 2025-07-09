@@ -3,8 +3,8 @@ import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { Professionals } from '../entities/professionals/professionals.entity';
 import { ProfessionalsController } from './professionals.controller';
 import { ProfessionalsService } from '../professionals/professionals.service';
-import { ProfessionalsRepository } from 'src/professionals/professionals.repository';
-import { UserModule } from 'src/user/user.module';
+import { ProfessionalsRepository } from './professionals.repository';
+import { UserModule } from '../user/user.module';
 
 @Global()
 @Module({

@@ -11,10 +11,10 @@ import {
 import { ExerciseService } from './exercise.service';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ExerciseResponseDto } from './dto/exercise-response.dto';
-import { Exercise } from 'src/entities/exercise/exercise.entity';
-import { ExerciseDefaultResponseDto } from 'src/exercise/dto/exercise-default-response.dto';
-import { ExerciseRegisterRequestDto } from 'src/exercise/dto/exercise-register-request.dto';
-import { ExerciseRegisterResponse } from 'src/exercise/dto/exercise-register-response.dto';
+import { Exercise } from '../entities/exercise/exercise.entity';
+import { ExerciseDefaultResponseDto } from './dto/exercise-default-response.dto';
+import { ExerciseRegisterRequestDto } from './dto/exercise-register-request.dto';
+import { ExerciseRegisterResponse } from './dto/exercise-register-response.dto';
 
 @Controller('exercise')
 @ApiTags('Exercise')

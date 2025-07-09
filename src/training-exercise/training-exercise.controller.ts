@@ -10,15 +10,11 @@ import {
   Query,
 } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { TrainingExercise } from 'src/entities/training-exercise/training-exercise.entity';
-import {
-  TrainingExerciseDefaultResponseDto,
-  TrainingExerciseResponse,
-} from 'src/training-exercise/dto/training-exercise-default-response.dto';
-import { TrainingExerciseRegisterRequestDto } from 'src/training-exercise/dto/training-exercise-register-request.dto';
-import { TrainingExerciseRegisterResponseDto } from 'src/training-exercise/dto/training-exercise-register-response.dto';
-import { TrainingExerciseResponseGenericDto } from 'src/training-exercise/dto/training-exercise-response.dto';
-import { TrainingExerciseService } from 'src/training-exercise/training-exercise.service';
+import { TrainingExercise } from '../entities/training-exercise/training-exercise.entity';
+import { TrainingExerciseDefaultResponseDto } from '../training-exercise/dto/training-exercise-default-response.dto';
+import { TrainingExerciseRegisterRequestDto } from '../training-exercise/dto/training-exercise-register-request.dto';
+import { TrainingExerciseRegisterResponseDto } from '../training-exercise/dto/training-exercise-register-response.dto';
+import { TrainingExerciseService } from '../training-exercise/training-exercise.service';
 
 @Controller('training-exercise')
 @ApiTags('training-exercise')

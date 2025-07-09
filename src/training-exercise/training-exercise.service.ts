@@ -1,9 +1,9 @@
 import { BadRequestException, forwardRef, Inject, Injectable } from '@nestjs/common';
-import { TrainingExercise } from 'src/entities/training-exercise/training-exercise.entity';
-import { ExerciseService } from 'src/exercise/exercise.service';
-import { TrainingExerciseResponseData } from 'src/training-exercise/dto/training-exercise-default-response.dto';
-import { TrainingExerciseRegisterRequestDto } from 'src/training-exercise/dto/training-exercise-register-request.dto';
-import { TrainingService } from 'src/training/training.service';
+import { TrainingExercise } from '../entities/training-exercise/training-exercise.entity';
+import { ExerciseService } from '../exercise/exercise.service';
+import { TrainingExerciseResponseData } from '../training-exercise/dto/training-exercise-default-response.dto';
+import { TrainingExerciseRegisterRequestDto } from '../training-exercise/dto/training-exercise-register-request.dto';
+import { TrainingService } from '../training/training.service';
 import { TrainingExerciseRepository } from './training-exercise.repository';
 import { InjectRepository } from '@mikro-orm/nestjs';
 

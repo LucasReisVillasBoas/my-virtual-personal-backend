@@ -1,10 +1,10 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { ExerciseRepository } from './exercise.repository';
 import { ExerciseResponseDto } from './dto/exercise-response.dto';
-import { ExerciseRegisterRequestDto } from 'src/exercise/dto/exercise-register-request.dto';
-import { Exercise } from 'src/entities/exercise/exercise.entity';
-import { MuscleGroupService } from 'src/muscle-group/muscle-group.service';
-import { generateCode } from 'src/utils/exercise.util';
+import { ExerciseRegisterRequestDto } from '../exercise/dto/exercise-register-request.dto';
+import { Exercise } from '../entities/exercise/exercise.entity';
+import { MuscleGroupService } from '../muscle-group/muscle-group.service';
+import { generateCode } from '../utils/exercise.util';
 
 @Injectable()
 export class ExerciseService {

@@ -1,13 +1,13 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { Training } from 'src/entities/training/training.entity';
-import { GoalsService } from 'src/goals/goals.service';
-import { TrainingRegisterRequestDto } from 'src/training/dto/training-register-request.dto';
-import { TrainingResponseData } from 'src/training/dto/training-response.dto';
-import { UserService } from 'src/user/user.service';
+import { Training } from '../entities/training/training.entity';
+import { GoalsService } from '../goals/goals.service';
+import { TrainingRegisterRequestDto } from '../training/dto/training-register-request.dto';
+import { TrainingResponseData } from '../training/dto/training-response.dto';
+import { UserService } from '../user/user.service';
 import { TrainingTypeResponseDto } from './dto/training-type-response.dto';
 import { TrainingTypeRepository } from './training-type.repository';
 import { TrainingRepository } from './training.repository';
-import { TrainingExerciseService } from 'src/training-exercise/training-exercise.service';
+import { TrainingExerciseService } from '../training-exercise/training-exercise.service';
 
 @Injectable()
 export class TrainingService {
