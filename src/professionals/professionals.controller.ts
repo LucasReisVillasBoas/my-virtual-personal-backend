@@ -10,11 +10,10 @@ import {
 } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ProfessionalsService } from './professionals.service';
-import { ProfessionalData } from 'src/professionals/dto/professional-found-response.dto';
-import { UserRegisterRequestDto } from 'src/user/dto/user-register-request.dto';
-import { UserResponseDto } from 'src/user/dto/user-response.dto';
-import { ProfessionalResponseDto } from 'src/professionals/dto/professional-response.dto';
-import { Professionals } from 'src/entities/professionals/professionals.entity';
+import { ProfessionalData } from './dto/professional-found-response.dto';
+import { UserRegisterRequestDto } from '../user/dto/user-register-request.dto';
+import { ProfessionalResponseDto } from './dto/professional-response.dto';
+import { Professionals } from '../entities/professionals/professionals.entity';
 
 @Controller('professionals')
 @ApiTags('Professionals')

@@ -1,9 +1,9 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { RestrictionRepository } from './restriction.repository';
-import { RestrictionRegisterRequestDto } from 'src/restriction/dto/restriction-register-request.dto';
-import { Restriction } from 'src/entities/restriction/restriction.entity';
-import { RestrictionResponseDto } from 'src/restriction/dto/restriction-response.dto';
-import { generateRestrictionCode } from 'src/utils/restriction.util';
+import { RestrictionRegisterRequestDto } from '../restriction/dto/restriction-register-request.dto';
+import { Restriction } from '../entities/restriction/restriction.entity';
+import { RestrictionResponseDto } from '../restriction/dto/restriction-response.dto';
+import { generateRestrictionCode } from '../utils/restriction.util';
 
 @Injectable()
 export class RestrictionService {

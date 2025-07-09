@@ -10,8 +10,8 @@ import {
 import { GenderService } from './gender.service';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { GenderResponseDto } from './dto/gender-response.dto';
-import { GenderDefaultResponseDto } from 'src/gender/dto/gender-default-response.dto';
-import { Gender } from 'src/entities/gender/gender.entity';
+import { GenderDefaultResponseDto } from '../gender/dto/gender-default-response.dto';
+import { Gender } from '../entities/gender/gender.entity';
 
 @Controller('gender')
 @ApiTags('Gender')

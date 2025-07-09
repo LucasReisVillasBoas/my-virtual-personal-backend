@@ -9,14 +9,13 @@ import {
   Query,
 } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Restriction } from 'src/entities/restriction/restriction.entity';
+import { Restriction } from '../entities/restriction/restriction.entity';
 import {
   RestrictionDefaultResponseDto
-} from 'src/restriction/dto/restriction-default-response.dto';
-import { RestrictionRegisterRequestDto } from 'src/restriction/dto/restriction-register-request.dto';
-import { RestrictionRegisterResponseDto } from 'src/restriction/dto/restriction-register-response.dto';
-import { RestrictionResponseDto } from 'src/restriction/dto/restriction-response.dto';
-import { RestrictionService } from 'src/restriction/restriction.service';
+} from '../restriction/dto/restriction-default-response.dto';
+import { RestrictionRegisterRequestDto } from '../restriction/dto/restriction-register-request.dto';
+import { RestrictionRegisterResponseDto } from '../restriction/dto/restriction-register-response.dto';
+import { RestrictionService } from '../restriction/restriction.service';
 
 @Controller('restriction')
 @ApiTags('Restriction')

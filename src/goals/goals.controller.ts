@@ -9,12 +9,11 @@ import {
   Query,
 } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Goals } from 'src/entities/goals/goals.entity';
-import { GoalRegisterRequestDto } from 'src/goals/dto/goal-register-request.dto';
-import { GoalRegisterResponseDto } from 'src/goals/dto/goal-register-response.dto';
-import { GoalResponseDto } from 'src/goals/dto/goal-response.dto';
-import { GoalsResponseDto } from 'src/goals/dto/goals-response.dto';
-import { GoalsService } from 'src/goals/goals.service';
+import { Goals } from '../entities/goals/goals.entity';
+import { GoalRegisterRequestDto } from './dto/goal-register-request.dto';
+import { GoalRegisterResponseDto } from './dto/goal-register-response.dto';
+import { GoalResponseDto } from './dto/goal-response.dto';
+import { GoalsService } from './goals.service';
 
 @Controller('goals')
 @ApiTags('Goals')
