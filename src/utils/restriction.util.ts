@@ -8,9 +8,9 @@ export const generateRestrictionCode = (
     code.code.startsWith(restrictionType),
   );
 
-    if (filteredCodes.length === 0) {
-        return `${restrictionType}-01`;
-    }
+  if (filteredCodes.length === 0) {
+    return `${restrictionType}-01`;
+  }
 
   const lastRestriction = filteredCodes[filteredCodes.length - 1];
 

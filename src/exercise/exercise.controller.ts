@@ -139,4 +139,22 @@ export class ExerciseController {
       },
     );
   }
+
+  @ApiResponse({
+    status: 201,
+    type: ExerciseRegisterRequestDto,
+    description: 'Custom Exercise register',
+  })
+  @Post('/custom')
+  async addCustomExercise(
+    @Body() body: ExerciseRegisterRequestDto & { userId: string },
+  ): Promise<ExerciseRegisterResponse> {
+    const exercise = await this.exerciseService.addCustomExerciseForUser(
+      body,
+      body.userId,
+    );
+    return new ExerciseRegisterResponse('Custom exercise created', 201, {
+      data: exercise,
+    });
+  }
 }

@@ -12,6 +12,7 @@ import { DeafultEntity } from '../default.entity';
 import { ExerciseRepository } from '../../exercise/exercise.repository';
 import { TrainingExercise } from '../training-exercise/training-exercise.entity';
 import { MuscleGroup } from '../muscle-group/muscle-group.entity';
+import { User } from '../user/user.entity';
 
 @Entity({ repository: () => ExerciseRepository })
 export class Exercise extends DeafultEntity {
@@ -43,4 +44,10 @@ export class Exercise extends DeafultEntity {
   @Type(() => MuscleGroup)
   @ManyToOne({ entity: () => MuscleGroup, index: true, nullable: true })
   muscleGroup: MuscleGroup;
+
+  @Expose({ toClassOnly: true })
+  @ApiProperty({ type: () => User, required: false })
+  @Type(() => User)
+  @ManyToOne({ entity: () => User, nullable: true, index: true })
+  user?: User;
 }
