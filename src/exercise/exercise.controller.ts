@@ -7,15 +7,18 @@ import {
   Post,
   Put,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { ExerciseService } from './exercise.service';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ExerciseResponseDto } from './dto/exercise-response.dto';
 import { Exercise } from '../entities/exercise/exercise.entity';
 import { ExerciseDefaultResponseDto } from './dto/exercise-default-response.dto';
 import { ExerciseRegisterRequestDto } from './dto/exercise-register-request.dto';
 import { ExerciseRegisterResponse } from './dto/exercise-register-response.dto';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
+@ApiBearerAuth('access-token')
 @Controller('exercise')
 @ApiTags('Exercise')
 export class ExerciseController {
@@ -45,6 +48,8 @@ export class ExerciseController {
     description: 'Exercise list',
     isArray: true,
   })
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth('access-token')
   @Get('/all')
   async list(): Promise<ExerciseDefaultResponseDto> {
     const exerciseList = await this.exerciseService.getAll();

@@ -65,9 +65,9 @@ export class UserController {
     const userList = await this.userService.getAll();
     const userListUpdated = userList.map((user) => filterUserFields(user, []));
 
-      return new UserRegisterResponseDto('Users found', 200, {
-        user: userListUpdated,
-      });
+    return new UserRegisterResponseDto('Users found', 200, {
+      user: userListUpdated,
+    });
   }
 
   @ApiResponse({
