@@ -11,7 +11,16 @@ async function bootstrap() {
     .setTitle('API de Exemplo')
     .setDescription('Descrição da API de Exemplo')
     .setVersion('1.0')
-    .addBearerAuth()
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        name: 'Authorization',
+        in: 'header',
+      },
+      'access-token',
+    )
     .build();
 
   app.useGlobalPipes(new ValidationPipe());

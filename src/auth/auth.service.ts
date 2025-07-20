@@ -13,6 +13,23 @@ export class AuthService {
     private readonly userService: UserService,
   ) {}
 
+  async login(loginDto: LoginDto): Promise<LoginResponseDto> {
+    const user: User = await this.validateLogin(loginDto);
+
+    if (!user) {
+      throw new BadRequestException('error-user-not_found');
+    }
+
+    const payload = { username: user.email, sub: user.id };
+    const loginResponseDto = new LoginResponseDto();
+    loginResponseDto.token = this.jwtService.sign(payload);
+
+    return loginResponseDto;
+  }
+
+  /*
+   * PRIVATE FUNCTIONS
+   */
   async validateLogin(loginDto: LoginDto): Promise<User> {
     const { email, password } = loginDto;
 
@@ -30,19 +47,5 @@ export class AuthService {
     hashedPassword: string,
   ): Promise<boolean> {
     return bcrypt.compare(plainPassword, hashedPassword);
-  }
-
-  async login(loginDto: LoginDto): Promise<LoginResponseDto> {
-    const user: User = await this.validateLogin(loginDto);
-
-    if (!user) {
-      throw new BadRequestException('error-user-not_found');
-    }
-
-    const payload = { username: user.email, sub: user.id };
-    const loginResponseDto = new LoginResponseDto();
-    loginResponseDto.token = this.jwtService.sign(payload);
-
-    return loginResponseDto;
   }
 }
