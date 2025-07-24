@@ -7,6 +7,7 @@ import { Restriction } from '../entities/restriction/restriction.entity';
 import { TrainingType } from '../entities/training/training-type.entity';
 import { Exercise } from '../entities/exercise/exercise.entity';
 import { Professionals } from '../entities/professionals/professionals.entity';
+import { AdditionalInfo } from '../entities/additional-info/additional-info.entity';
 import { DATABASE_NAME, DATABASE_PASSWORD, DATABASE_USER } from '../settings';
 
 export default defineConfig({
@@ -22,6 +23,7 @@ export default defineConfig({
     TrainingType,
     Exercise,
     Professionals,
+    AdditionalInfo,
   ],
   migrations: {
     path: 'src/database/migrations',
