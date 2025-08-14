@@ -14,6 +14,7 @@ import { GenderModule } from './gender/gender.module';
 import { ExerciseModule } from './exercise/exercise.module';
 import { ProfessionalsModule } from './professionals/professionals.module';
 import { GeminiModule } from './gemini/gemini.module';
+import { AdditionalInfoModule } from './additional-info/additional-info.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { GeminiModule } from './gemini/gemini.module';
     ExerciseModule,
     ProfessionalsModule,
     GeminiModule,
+    AdditionalInfoModule,
   ],
   controllers: [AppController],
   providers: [AppService],

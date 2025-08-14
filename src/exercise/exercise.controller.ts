@@ -154,7 +154,7 @@ export class ExerciseController {
       body.userId,
     );
     return new ExerciseRegisterResponse('Custom exercise created', 201, {
-      data: exercise,
+      exercise: exercise,
     });
   }
 }
