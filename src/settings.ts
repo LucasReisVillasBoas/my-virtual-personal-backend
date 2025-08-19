@@ -23,3 +23,5 @@ export const MIN_HEIGTH = parseInt(getEnvOrDefault('MIN_HEIGTH', '0'), 10);
 export const MAX_HEIGTH = parseInt(getEnvOrDefault('MAX_HEIGTH', '100'), 10);
 export const MIN_WEIGHT = parseInt(getEnvOrDefault('MIN_WEIGHT', '0'), 10);
 export const MAX_WEIGHT = parseInt(getEnvOrDefault('MAX_WEIGHT', '100'), 10);
+
+export const JWT_SECRET = getEnvOrThrow('JWT_SECRET');
